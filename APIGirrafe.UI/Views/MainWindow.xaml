@@ -66,7 +66,7 @@
                                              Height="20" Width="20" Margin="0,0,5,1" VerticalAlignment="Center"></materialDesign:PackIcon>
                 </Grid>
 
-                <TextBlock Text="API Tester"
+                <TextBlock Text="API Giraffe"
                            FontFamily="Roboto" FontSize="12" Padding="3px" Margin="10 0"
                            Foreground="{DynamicResource MaterialDesignBackground}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Grid>
