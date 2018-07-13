@@ -21,6 +21,11 @@ namespace APIGirrafe.Domain
 
         public string Url { get; set; }
 
+        public SoapRequest()
+        {
+            _headers = new List<Header>();
+        }
+
         public void AddHeader(Header header)
         {
             _headers.Add(header);
