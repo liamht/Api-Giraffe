@@ -175,16 +175,24 @@
     <Compile Include="ViewModels\Menus\Menu.cs" />
     <Compile Include="ViewModels\Menus\MenuGroup.cs" />
     <Compile Include="ViewModels\Menus\RequestMenuItem.cs" />
+    <Compile Include="ViewModels\NewHeaderViewModel.cs" />
     <Compile Include="ViewModels\NewRequestViewModel.cs" />
     <Compile Include="ViewModels\NewGroupViewModel.cs" />
     <Compile Include="ViewModels\NewItemViewModel.cs" />
     <Compile Include="ViewModels\NotifyableViewModel.cs" />
+    <Compile Include="Views\NewHeaderDialog.xaml.cs">
+      <DependentUpon>NewHeaderDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CreateGroupDialog.xaml.cs">
       <DependentUpon>CreateGroupDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\NewRequestDialog.xaml.cs">
       <DependentUpon>NewRequestDialog.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\NewHeaderDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\CurrentRequestPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

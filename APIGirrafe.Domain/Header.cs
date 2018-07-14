@@ -2,11 +2,11 @@
 {
     public class Header
     {
-        public int Id { get; private set; }
+        public int Id { get; set; }
 
-        public string Name { get; private set; }
+        public string Name { get; set; }
 
-        public string Value { get; private set; }
+        public string Value { get; set; }
 
         internal static Header FromDataLayerObject(Data.Entities.Header entity)
         {
