@@ -2,7 +2,7 @@
 
 namespace APIGirrafe.Data.Migrations
 {
-    public partial class Initial_DB : Migration
+    public partial class Initial_db_Snapshot : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -41,7 +41,7 @@ namespace APIGirrafe.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Header",
+                name: "Headers",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -52,9 +52,9 @@ namespace APIGirrafe.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Header", x => x.Id);
+                    table.PrimaryKey("PK_Headers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Header_Requests_RequestId",
+                        name: "FK_Headers_Requests_RequestId",
                         column: x => x.RequestId,
                         principalTable: "Requests",
                         principalColumn: "Id",
@@ -62,8 +62,8 @@ namespace APIGirrafe.Data.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Header_RequestId",
-                table: "Header",
+                name: "IX_Headers_RequestId",
+                table: "Headers",
                 column: "RequestId");
 
             migrationBuilder.CreateIndex(
@@ -75,7 +75,7 @@ namespace APIGirrafe.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Header");
+                name: "Headers");
 
             migrationBuilder.DropTable(
                 name: "Requests");
