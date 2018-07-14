@@ -8,7 +8,7 @@ namespace APIGirrafe.Data.UnitOfWork
         public SqliteUnitOfWork CreateDbContext(string[] args)
         {
             var builder = new DbContextOptionsBuilder<SqliteUnitOfWork>();
-            builder.UseSqlite(@"Data Source=ApiTester.db");
+            builder.UseSqlite(@"Data Source=APIGiraffe.db");
 
             return new SqliteUnitOfWork(builder.Options);
         }

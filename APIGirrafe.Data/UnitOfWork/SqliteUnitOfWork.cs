@@ -14,7 +14,7 @@ namespace APIGirrafe.Data.UnitOfWork
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite(@"Data Source=ApiTester.db");
+            optionsBuilder.UseSqlite(@"Data Source=ApiGiraffe.db");
         }
 
         void IUnitOfWork.SaveChanges()
