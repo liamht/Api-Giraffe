@@ -29,7 +29,7 @@ namespace APIGirrafe.Data.Repository
 
         public IQueryable<Request> Get()
         {
-            return _unitOfWork.Requests;
+            return _unitOfWork.Requests.Include(c => c.Headers);
         }
 
         public void Update(Request request)

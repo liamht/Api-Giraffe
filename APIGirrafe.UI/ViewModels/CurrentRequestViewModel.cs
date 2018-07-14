@@ -2,19 +2,23 @@
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using APIGirrafe.ApplicationServices.Requests.Commands.AddNewHeader;
+using APIGirrafe.ApplicationServices.Requests.Commands.UpdateRequest;
+using APIGirrafe.ApplicationServices.Requests.Queries.GetRequestDetails;
 using APIGirrafe.Domain;
-using APIGirrafe.Domain.Services;
 using APIGirrafe.UI.Navigation;
 using APIGirrafe.UI.Views;
+using Header = APIGirrafe.ApplicationServices.Requests.Queries.GetRequestDetails.Header;
 
 namespace APIGirrafe.UI.ViewModels
 {
     public class CurrentRequestViewModel : BasePageViewModel
     {
         public override string Title => this.Name;
-
-        private readonly IRequestService _service;
-
+        
+        private readonly IAddNewHeaderCommand _addHeaderCommand;
+        private readonly IUpdateRequestCommand _updateRequestCommand;
+        private readonly IGetRequestDetailsQuery _getDetailsQuery;
         private readonly INavigationHelper _navigationHelper;
 
         private bool _changesEnabled;
@@ -46,7 +50,7 @@ namespace APIGirrafe.UI.ViewModels
                 _url = value;
                 if (hasChanged)
                 {
-                    SaveChanges();
+                    _updateRequestCommand.Execute(_requestId, Url);
                 }
                 NotifyPropertyChanged(nameof(Url));
             }
@@ -73,10 +77,6 @@ namespace APIGirrafe.UI.ViewModels
             {
                 var hasChanged = _name != value && !string.IsNullOrWhiteSpace(value) && _changesEnabled;
                 _name = value;
-                if (hasChanged)
-                {
-                    SaveChanges();
-                }
                 NotifyPropertyChanged(nameof(Name));
             }
         }
@@ -85,19 +85,24 @@ namespace APIGirrafe.UI.ViewModels
 
         public ObservableCollection<Header> RequestHeaders { get; set; }
 
-        public CurrentRequestViewModel(IRequestService service, INavigationHelper nav)
+        public CurrentRequestViewModel(IAddNewHeaderCommand addHeaderCommand, IUpdateRequestCommand updateRequestCommand,
+            IGetRequestDetailsQuery getDetailsQuery, INavigationHelper nav)
         {
             Response = "The response from the server will show here when a request is sent";
+
             RequestHeaders = new ObservableCollection<Header>();
             GetResponseCommand = new ActionCommand(async () => await GetResponse());
             AddHeaderCommand = new ActionCommand(() => ShowAddHeaderModal());
-            _service = service;
+            
+            _addHeaderCommand = addHeaderCommand;
+            _updateRequestCommand = updateRequestCommand;
+            _getDetailsQuery = getDetailsQuery;
             _navigationHelper = nav;
         }
 
         private void ShowAddHeaderModal()
         {
-            var vm = new NewHeaderViewModel(_navigationHelper, _service, _requestId);
+            var vm = new NewHeaderViewModel(_navigationHelper, _addHeaderCommand, _requestId);
             vm.OnSuccessCallback += (sender, args) =>
             {
                 AddHeaderFromViewModel(vm);
@@ -113,51 +118,33 @@ namespace APIGirrafe.UI.ViewModels
 
         private async Task GetResponse()
         {
-            var httprequest = new SoapRequest()
+            var httprequest = new Request()
             {
                 Url = this.Url,
             };
 
             foreach (var header in RequestHeaders)
             {
-                httprequest.AddHeader(header);
+                httprequest.AddHeader(new Domain.Header() { Name = header.Name, Value = header.Value });
             }
 
             Response = await httprequest.GetResponse();
         }
 
-        public void LoadValues(int id)
+        public async Task LoadValues(int id)
         {
             if (id <= 0)
             {
                 throw new ArgumentException("Cannot fetch ID from database");
             }
 
-            var request = _service.GetById(id);
+            var request = await _getDetailsQuery.ExecuteAsync(id);
 
             _requestId = request.Id;
             Url = request.Url;
 
             RequestHeaders = request.Headers == null ? new ObservableCollection<Header>() : new ObservableCollection<Header>(request.Headers);
             _changesEnabled = true;
-        }
-
-        public void SaveChanges()
-        {
-
-            var request = new SoapRequest()
-            {
-                Id = _requestId,
-                Url = Url,
-                RequestName = Name
-            };
-
-            foreach (var header in RequestHeaders)
-            {
-                request.AddHeader(header);
-            }
-
-            _service.UpdateRequest(request);
         }
     }
 }

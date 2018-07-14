@@ -1,5 +1,4 @@
-﻿using APIGirrafe.Domain;
-using APIGirrafe.Domain.Services;
+﻿using APIGirrafe.ApplicationServices.Requests.Commands.AddNewRequestGroup;
 using APIGirrafe.UI.Navigation;
 
 namespace APIGirrafe.UI.ViewModels
@@ -8,19 +7,18 @@ namespace APIGirrafe.UI.ViewModels
     {
         public override string Title => "Create New Group";
 
-        private readonly IGroupService _service;
+        private readonly IAddNewRequestGroupCommand _command;
 
-        public NewGroupViewModel(INavigationHelper navigation, IGroupService service) 
+        public NewGroupViewModel(INavigationHelper navigation, IAddNewRequestGroupCommand command) 
             : base(navigation)
         {
-            _service = service;
+            _command = command;
         }
 
         public override void OnSuccess()
         {
-            var group = new RequestGroup() { Name = ItemName };
+            _command.ExecuteAsync(ItemName);
 
-            _service.AddNewGroup(group);
             Navigation.DestroyModal();
             Navigation.RefreshMenu();
         }

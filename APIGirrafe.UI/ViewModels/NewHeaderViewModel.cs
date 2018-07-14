@@ -1,5 +1,4 @@
-﻿using APIGirrafe.Domain;
-using APIGirrafe.Domain.Services;
+﻿using APIGirrafe.ApplicationServices.Requests.Commands.AddNewHeader;
 using APIGirrafe.UI.Navigation;
 using System;
 
@@ -7,7 +6,7 @@ namespace APIGirrafe.UI.ViewModels
 {
     public class NewHeaderViewModel : NewItemViewModel
     {
-        private readonly IRequestService _service;
+        private readonly IAddNewHeaderCommand _command;
 
         public event EventHandler OnSuccessCallback;
 
@@ -26,20 +25,16 @@ namespace APIGirrafe.UI.ViewModels
             }
         }
 
-        public NewHeaderViewModel(INavigationHelper navigation, IRequestService service, int requestId)
+        public NewHeaderViewModel(INavigationHelper navigation, IAddNewHeaderCommand command, int requestId)
         : base(navigation)
         {
-            _service = service;
+            _command = command;
             _requestId = requestId;
         }
 
         public override void OnSuccess()
         {
-            var header = new Header() { Name = ItemName, Value = ItemValue };
-
-            var request = _service.GetById(_requestId);
-            request.AddHeader(header);
-            _service.UpdateRequest(request);
+            _command.Execute(_requestId, ItemName, ItemValue);
 
             Navigation.DestroyModal();
             Navigation.RefreshMenu();

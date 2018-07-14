@@ -18,7 +18,7 @@
             };
         }
 
-        internal Data.Entities.Header ToDataLayerObject()
+        public Data.Entities.Header ToDataLayerObject()
         {
             return new Data.Entities.Header()
             {

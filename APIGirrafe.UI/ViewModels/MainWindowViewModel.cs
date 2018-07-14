@@ -3,12 +3,13 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Input;
-using APIGirrafe.Domain;
 using APIGirrafe.UI.ViewModels.Menus;
-using APIGirrafe.Domain.Services;
 using APIGirrafe.UI.Navigation;
 using APIGirrafe.UI.Views;
 using Menu = APIGirrafe.UI.ViewModels.Menus.Menu;
+using APIGirrafe.ApplicationServices.Requests.Queries.GetRequestGroups;
+using System.Threading.Tasks;
+using APIGirrafe.ApplicationServices.Requests.Commands.DeleteRequestGroup;
 
 namespace APIGirrafe.UI.ViewModels
 {
@@ -17,8 +18,8 @@ namespace APIGirrafe.UI.ViewModels
         public event EventHandler OnNewGroupButtonClicked;
 
         private readonly INavigationHelper _navigation;
-        private readonly IGroupService _groupService;
-
+        private readonly IGetRequestGroupsQuery _getGroupsQuery;
+        private readonly IDeleteRequestGroupCommand _deleteGroupCommand;
         private readonly Func<NewRequestViewModel> _newRequestViewModelCreator;
         private readonly Func<CurrentRequestViewModel> _currentRequestViewModelCreator;
 
@@ -83,11 +84,12 @@ namespace APIGirrafe.UI.ViewModels
 
         #endregion
 
-        public MainWindowViewModel(IGroupService groupService, INavigationHelper navigation, 
+        public MainWindowViewModel(IGetRequestGroupsQuery getGroupsQuery, IDeleteRequestGroupCommand deleteGroupCommand, INavigationHelper navigation, 
             Func<NewRequestViewModel> newRequestInitiator, Func<CurrentRequestViewModel> currentRequestInitiator)
         {
             _navigation = navigation;
-            _groupService = groupService;
+            _getGroupsQuery = getGroupsQuery;
+            _deleteGroupCommand = deleteGroupCommand;
             _newRequestViewModelCreator = newRequestInitiator;
             _currentRequestViewModelCreator = currentRequestInitiator;
 
@@ -108,12 +110,12 @@ namespace APIGirrafe.UI.ViewModels
 
         public void LoadMenu()
         {
-            var groups = _groupService.FetchFromDatabase();
+            var groups = _getGroupsQuery.Execute();
 
             var menuGroups = groups.Select(group => new MenuGroup(group.Name,
-                GetNewRequestDialogAction(group),
-                GetDeleteGroupAction(group),
-                group.Requests.Select(request => new RequestMenuItem(request.RequestName, request.Id, GetNavigateToCurrentRequestPageAction(request))).ToArray()
+                GetNewRequestDialogAction(group.Id),
+                GetDeleteGroupAction(group.Id),
+                group.Requests.Select(request => new RequestMenuItem(request.Name, request.Id, GetNavigateToCurrentRequestPageAction(request.Id, request.Name))).ToArray()
             ));
 
             Menu = new Menu()
@@ -122,33 +124,33 @@ namespace APIGirrafe.UI.ViewModels
             };
         }
 
-        private Action GetNewRequestDialogAction(Domain.RequestGroup requestGroup)
+        private Action GetNewRequestDialogAction(int requestGroupId)
         {
             return () =>
             {
                 var vm = _newRequestViewModelCreator.Invoke();
-                vm.SetGroupId(requestGroup);
+                vm.SetGroupId(requestGroupId);
                 _navigation.ShowModal(new NewRequestDialog(), vm);
             };
         }
 
-        private Action GetDeleteGroupAction(Domain.RequestGroup requestGroup)
+        private Action GetDeleteGroupAction(int requestGroupId)
         {
-            return () =>
+            return async () =>
             {
-                _groupService.Delete(requestGroup);
+                await _deleteGroupCommand.ExecuteAsync(requestGroupId);
                 _navigation.RefreshMenu();
             };
         }
 
-        private Action GetNavigateToCurrentRequestPageAction(SoapRequest request)
+        private Action GetNavigateToCurrentRequestPageAction(int requestId, string requestName)
         {
             return () =>
             {
                 var vm = _currentRequestViewModelCreator.Invoke();
-                vm.Name = request.RequestName;
+                vm.Name = requestName;
                 _navigation.NavigateTo(new CurrentRequestPage(), vm);
-                vm.LoadValues(request.Id);
+                vm.LoadValues(requestId);
             };
         }
     }

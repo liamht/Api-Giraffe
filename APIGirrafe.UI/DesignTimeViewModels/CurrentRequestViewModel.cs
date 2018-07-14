@@ -6,7 +6,6 @@ namespace APIGirrafe.UI.DesignTimeViewModels
 {
     public class CurrentRequestViewModel
     {
-
         public ICommand GetResponseCommand { get; set; }
 
         public string Url { get; set; }

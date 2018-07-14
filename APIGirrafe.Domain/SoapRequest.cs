@@ -8,7 +8,7 @@ using APIGirrafe.Data.Entities;
 
 namespace APIGirrafe.Domain
 {
-    public class SoapRequest
+    public class Request
     {
         public int Id { get; set; }
 
@@ -21,7 +21,7 @@ namespace APIGirrafe.Domain
 
         public string Url { get; set; }
 
-        public SoapRequest()
+        public Request()
         {
             _headers = new List<Header>();
         }
@@ -31,9 +31,9 @@ namespace APIGirrafe.Domain
             _headers.Add(header);
         }
         
-        internal static SoapRequest FromDatabaseEntity(Request entity)
+        internal static Request FromDatabaseEntity(Data.Entities.Request entity)
         {
-            return new SoapRequest()
+            return new Request()
             {
                 Id = entity.Id,
                 GroupId = entity.GroupId,
@@ -43,11 +43,10 @@ namespace APIGirrafe.Domain
             };
         }
 
-        internal Request ToDatabaseEntity()
+        public Data.Entities.Request ToDatabaseEntity()
         {
-            return new Request()
+            return new Data.Entities.Request()
             {
-                // todo
                 Headers = Headers.Select(c => c.ToDataLayerObject()).ToList(),
                 Id = Id,
                 Name = RequestName,

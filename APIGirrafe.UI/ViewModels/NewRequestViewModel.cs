@@ -1,6 +1,5 @@
 ﻿using System;
-using APIGirrafe.Domain;
-using APIGirrafe.Domain.Services;
+using APIGirrafe.ApplicationServices.Requests.Commands.AddNewRequest;
 using APIGirrafe.UI.Navigation;
 
 namespace APIGirrafe.UI.ViewModels
@@ -9,31 +8,29 @@ namespace APIGirrafe.UI.ViewModels
     {
         public override string Title => "Create New Request";
 
-        private readonly IRequestService _service;
+        private readonly IAddNewRequestCommand _command;
 
-        private RequestGroup _group;
+        private int _groupId;
 
-        public NewRequestViewModel(INavigationHelper navigation, IRequestService service) 
+        public NewRequestViewModel(INavigationHelper navigation, IAddNewRequestCommand command) 
             : base(navigation)
         {
-            _service = service;
+            _command = command;
         }
 
-        public void SetGroupId(RequestGroup group)
+        public void SetGroupId(int groupId)
         {
-            _group = group;
+            _groupId = groupId;
         }
 
         public override void OnSuccess()
         {
-            if (_group == null)
+            if (_groupId == 0)
             {
                 throw new ArgumentException("group for request not set");
             }
 
-            var request = new SoapRequest() { RequestName = ItemName, GroupId = _group.Id};
-
-            _service.CreateRequest(request);
+            _command.Execute(_groupId, ItemName);
             Navigation.DestroyModal();
             Navigation.RefreshMenu();
         }

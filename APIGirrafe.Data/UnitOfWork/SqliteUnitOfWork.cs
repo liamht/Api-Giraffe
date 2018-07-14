@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using APIGirrafe.Data.Entities;
+using System.Threading.Tasks;
 
 namespace APIGirrafe.Data.UnitOfWork
 {
@@ -17,6 +18,11 @@ namespace APIGirrafe.Data.UnitOfWork
         void IUnitOfWork.SaveChanges()
         {
             SaveChanges();
+        }
+
+        async Task IUnitOfWork.SaveChangesAsync()
+        {
+            await SaveChangesAsync();
         }
 
         public SqliteUnitOfWork(DbContextOptions options) 
