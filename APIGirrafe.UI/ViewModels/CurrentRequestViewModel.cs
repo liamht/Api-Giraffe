@@ -21,9 +21,19 @@ namespace APIGirrafe.UI.ViewModels
 
         private int _requestId;
 
+        #region Commands
+
         public ICommand GetResponseCommand { get; set; }
 
         public ICommand AddHeaderCommand { get; set; }
+
+        public ICommand DeleteHeaderCommand { get; set; }
+
+        public ICommand EditHeaderCommand { get; set; }
+
+        #endregion
+
+        #region Page properties
 
         private string _url;
 
@@ -70,6 +80,8 @@ namespace APIGirrafe.UI.ViewModels
                 NotifyPropertyChanged(nameof(Name));
             }
         }
+
+        #endregion
 
         public ObservableCollection<Header> RequestHeaders { get; set; }
 

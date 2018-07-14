@@ -103,10 +103,10 @@
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                                            <TextBlock Foreground="{DynamicResource MaterialDesignDarkForeground}" Text="{Binding Name}" 
+                                            <TextBlock Foreground="{StaticResource Body Light}" Text="{Binding Name}" 
                                                        FontWeight="Bold" FontSize="16" HorizontalAlignment="Stretch">
                                                 <TextBlock.ContextMenu>
-                                                    <ContextMenu Margin="0" Background="{StaticResource MaterialDesignDarkBackground}" Foreground="{StaticResource MaterialDesignDarkForeground}">
+                                                    <ContextMenu Margin="0" Background="{StaticResource Sidebar Color}" Foreground="{StaticResource Body Light}">
                                                         <MenuItem Margin="0"
                                                             Header="New Request"
                                                             Command="{Binding AddNewItemCommand}"/>

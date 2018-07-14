@@ -51,7 +51,17 @@
                         <DataTemplate>
                             <Border>
                                 <Grid HorizontalAlignment="Stretch" Margin="0">
-                                    <Grid.ColumnDefinitions>
+                                <Grid.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Margin="0"
+                                                            Header="Edit Header"
+                                                            Command="{Binding EditHeaderCommand}"/>
+                                        <MenuItem Margin="0"
+                                                            Header="Delete Header"
+                                                            Command="{Binding DeleteHeaderCommand}"/>
+                                    </ContextMenu>
+                                </Grid.ContextMenu>
+                                <Grid.ColumnDefinitions>
                                         <ColumnDefinition></ColumnDefinition>
                                         <ColumnDefinition></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
