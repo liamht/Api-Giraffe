@@ -55,10 +55,10 @@
                                     <ContextMenu>
                                         <MenuItem Margin="0"
                                                             Header="Edit Header"
-                                                            Command="{Binding EditHeaderCommand}"/>
+                                                            Command="{Binding EditHeaderCommand}" CommandParameter="{Binding Id}"/>
                                         <MenuItem Margin="0"
                                                             Header="Delete Header"
-                                                            Command="{Binding DeleteHeaderCommand}"/>
+                                                            Command="{Binding DeleteHeaderCommand}" CommandParameter="{Binding Id}"/>
                                     </ContextMenu>
                                 </Grid.ContextMenu>
                                 <Grid.ColumnDefinitions>

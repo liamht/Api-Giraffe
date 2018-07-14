@@ -10,6 +10,8 @@ namespace APIGirrafe.Data.UnitOfWork
 
         DbSet<Request> Requests { get; set; }
 
+        DbSet<Header> Headers { get; set; }
+
         void SaveChanges();
 
         Task SaveChangesAsync();

@@ -145,12 +145,12 @@ namespace APIGirrafe.UI.ViewModels
 
         private Action GetNavigateToCurrentRequestPageAction(int requestId, string requestName)
         {
-            return () =>
+            return async () =>
             {
                 var vm = _currentRequestViewModelCreator.Invoke();
                 vm.Name = requestName;
                 _navigation.NavigateTo(new CurrentRequestPage(), vm);
-                vm.LoadValues(requestId);
+                await vm.LoadValues(requestId);
             };
         }
     }

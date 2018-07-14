@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using APIGirrafe.ApplicationServices.Requests.Commands.AddNewHeader;
+using APIGirrafe.ApplicationServices.Requests.Commands.DeleteHeader;
 using APIGirrafe.ApplicationServices.Requests.Commands.UpdateRequest;
 using APIGirrafe.ApplicationServices.Requests.Queries.GetRequestDetails;
 using APIGirrafe.Domain;
@@ -18,6 +19,7 @@ namespace APIGirrafe.UI.ViewModels
         
         private readonly IAddNewHeaderCommand _addHeaderCommand;
         private readonly IUpdateRequestCommand _updateRequestCommand;
+        private readonly IDeleteHeaderCommand _deleteHeaderCommand;
         private readonly IGetRequestDetailsQuery _getDetailsQuery;
         private readonly INavigationHelper _navigationHelper;
 
@@ -85,19 +87,26 @@ namespace APIGirrafe.UI.ViewModels
 
         public ObservableCollection<Header> RequestHeaders { get; set; }
 
-        public CurrentRequestViewModel(IAddNewHeaderCommand addHeaderCommand, IUpdateRequestCommand updateRequestCommand,
-            IGetRequestDetailsQuery getDetailsQuery, INavigationHelper nav)
+        public CurrentRequestViewModel(IAddNewHeaderCommand addHeaderCommand, IUpdateRequestCommand updateRequestCommand, 
+            IDeleteHeaderCommand deleteHeaderCommand, IGetRequestDetailsQuery getDetailsQuery, INavigationHelper nav)
         {
             Response = "The response from the server will show here when a request is sent";
 
             RequestHeaders = new ObservableCollection<Header>();
             GetResponseCommand = new ActionCommand(async () => await GetResponse());
             AddHeaderCommand = new ActionCommand(() => ShowAddHeaderModal());
+            DeleteHeaderCommand = new ActionCommand<int>(headerId => DeleteHeader(headerId));
             
             _addHeaderCommand = addHeaderCommand;
             _updateRequestCommand = updateRequestCommand;
+            _deleteHeaderCommand = deleteHeaderCommand;
             _getDetailsQuery = getDetailsQuery;
             _navigationHelper = nav;
+        }
+
+        private void DeleteHeader(int headerId)
+        {
+            _deleteHeaderCommand.Execute(headerId);
         }
 
         private void ShowAddHeaderModal()

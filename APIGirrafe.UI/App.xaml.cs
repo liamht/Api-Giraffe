@@ -18,6 +18,7 @@ using APIGirrafe.ApplicationServices.Requests.Queries.GetRequestDetails;
 using APIGirrafe.ApplicationServices.Requests.Commands.AddNewHeader.Factory;
 using APIGirrafe.ApplicationServices.Requests.Commands.AddNewRequest.Factory;
 using APIGirrafe.ApplicationServices.Requests.Commands.AddNewRequestGroup.Factory;
+using APIGirrafe.ApplicationServices.Requests.Commands.DeleteHeader;
 
 namespace APIGirrafe.UI
 {
@@ -77,6 +78,7 @@ namespace APIGirrafe.UI
             _container.Bind<IAddNewRequestGroupCommand>().To<AddNewRequestGroupCommand>();
             _container.Bind<IDeleteRequestGroupCommand>().To<DeleteRequestGroupCommand>();
             _container.Bind<IUpdateRequestCommand>().To<UpdateRequestCommand>();
+            _container.Bind<IDeleteHeaderCommand>().To<DeleteHeaderCommand>();
 
             _container.Bind<IGetRequestDetailsQuery>().To<GetRequestDetailsQuery>();
             _container.Bind<IGetRequestGroupsQuery>().To<GetRequestGroupsQuery>();

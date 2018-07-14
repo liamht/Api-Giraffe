@@ -10,6 +10,8 @@ namespace APIGirrafe.Data.UnitOfWork
 
         public DbSet<RequestGroup> RequestGroups { get; set; }
 
+        public DbSet<Header> Headers { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlite(@"Data Source=ApiTester.db");
