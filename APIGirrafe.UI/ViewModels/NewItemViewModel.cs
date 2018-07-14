@@ -10,7 +10,6 @@ namespace APIGirrafe.UI.ViewModels
         public ICommand OnConfirmCommand => new ActionCommand(OnSuccess);
 
         private string _itemName;
-
         public string ItemName
         {
             get => _itemName;
