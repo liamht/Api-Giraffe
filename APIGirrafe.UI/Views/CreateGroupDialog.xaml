@@ -11,8 +11,8 @@
     <materialDesign:DialogHost VerticalAlignment="Stretch">
         <Grid Background="{StaticResource MaterialDesignBackground}" VerticalAlignment="Stretch">
             <Grid.RowDefinitions>
-                <RowDefinition Height="5*"></RowDefinition>
-                <RowDefinition Height="7*"></RowDefinition>
+                <RowDefinition Height="125px"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
 
             <StackPanel Grid.Row="0" Background="{StaticResource Alert Background Color}" >
