@@ -67,7 +67,7 @@
                         </Style>
                     </ListView.ItemContainerStyle>
                 </ListView>
-                <Button Width="150" HorizontalAlignment="Right" Margin="0 15 0 0" Style="{StaticResource MaterialDesignFlatButton}">Add Header</Button>
+                <Button Width="150" HorizontalAlignment="Right" Margin="0 15 0 0" Style="{StaticResource MaterialDesignFlatButton}" Command="{Binding AddHeaderCommand}">Add Header</Button>
             </StackPanel>
 
 

@@ -4,6 +4,8 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using APIGirrafe.Domain;
 using APIGirrafe.Domain.Services;
+using APIGirrafe.UI.Navigation;
+using APIGirrafe.UI.Views;
 
 namespace APIGirrafe.UI.ViewModels
 {
@@ -13,11 +15,15 @@ namespace APIGirrafe.UI.ViewModels
 
         private readonly IRequestService _service;
 
+        private readonly INavigationHelper _navigationHelper;
+
         private bool _changesEnabled;
 
         private int _requestId;
 
         public ICommand GetResponseCommand { get; set; }
+
+        public ICommand AddHeaderCommand { get; set; }
 
         private string _url;
 
@@ -67,15 +73,33 @@ namespace APIGirrafe.UI.ViewModels
 
         public ObservableCollection<Header> RequestHeaders { get; set; }
 
-        public CurrentRequestViewModel(IRequestService service)
+        public CurrentRequestViewModel(IRequestService service, INavigationHelper nav)
         {
             Response = "The response from the server will show here when a request is sent";
             RequestHeaders = new ObservableCollection<Header>();
             GetResponseCommand = new ActionCommand(async () => await GetResponse());
+            AddHeaderCommand = new ActionCommand(() => ShowAddHeaderModal());
             _service = service;
+            _navigationHelper = nav;
         }
 
-        public async Task GetResponse()
+        private void ShowAddHeaderModal()
+        {
+            var vm = new NewHeaderViewModel(_navigationHelper, _service, _requestId);
+            vm.OnSuccessCallback += (sender, args) =>
+            {
+                AddHeaderFromViewModel(vm);
+            };
+
+            _navigationHelper.ShowModal(new NewHeaderDialog(), vm);
+        }
+
+        private void AddHeaderFromViewModel(NewHeaderViewModel vm)
+        {
+            RequestHeaders.Add(new Header() { Name = vm.ItemName, Value = vm.ItemValue });
+        }
+
+        private async Task GetResponse()
         {
             var httprequest = new SoapRequest()
             {
@@ -96,7 +120,7 @@ namespace APIGirrafe.UI.ViewModels
             {
                 throw new ArgumentException("Cannot fetch ID from database");
             }
-            
+
             var request = _service.GetById(id);
 
             _requestId = request.Id;

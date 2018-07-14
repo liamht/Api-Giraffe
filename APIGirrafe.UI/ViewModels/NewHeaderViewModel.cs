@@ -1,12 +1,15 @@
 ﻿using APIGirrafe.Domain;
 using APIGirrafe.Domain.Services;
 using APIGirrafe.UI.Navigation;
+using System;
 
 namespace APIGirrafe.UI.ViewModels
 {
     public class NewHeaderViewModel : NewItemViewModel
     {
         private readonly IRequestService _service;
+
+        public event EventHandler OnSuccessCallback;
 
         private int _requestId;
 
@@ -23,10 +26,11 @@ namespace APIGirrafe.UI.ViewModels
             }
         }
 
-        public NewHeaderViewModel(INavigationHelper navigation, IRequestService service)
+        public NewHeaderViewModel(INavigationHelper navigation, IRequestService service, int requestId)
         : base(navigation)
         {
             _service = service;
+            _requestId = requestId;
         }
 
         public override void OnSuccess()
@@ -39,6 +43,8 @@ namespace APIGirrafe.UI.ViewModels
 
             Navigation.DestroyModal();
             Navigation.RefreshMenu();
+
+            OnSuccessCallback.Invoke(this, new EventArgs());
         }
     }
 }
