@@ -85,9 +85,7 @@ namespace APIGirrafe.UI
             var dbOptions = new DbContextOptionsBuilder().UseSqlite(@"Data Source=ApiGiraffe.db");
             _container.Bind<IUnitOfWork>().To<SqliteUnitOfWork>().InSingletonScope().WithConstructorArgument(dbOptions.Options);
 
-            _container.Bind<MainWindowViewModel>().To<MainWindowViewModel>().InSingletonScope()
-                .WithConstructorArgument<Func<NewRequestViewModel>>(() => _container.Get<NewRequestViewModel>())
-                .WithConstructorArgument<Func<CurrentRequestViewModel>>(() => _container.Get<CurrentRequestViewModel>());
+            _container.Bind<MainWindowViewModel>().To<MainWindowViewModel>().InSingletonScope();
         }
     }
 }
