@@ -20,16 +20,6 @@ namespace APIGirrafe.UI.Navigation
             vm.HideDialog();
         }
 
-        [Obsolete("Consider passing the type of usercontrol and viewmodel as arguments so the navigation helper can create new instances of the objects itself")]
-        public void NavigateTo(UserControl page, BasePageViewModel vm)
-        {
-            var mainWindowVm = GetMainWindowViewModel();
-            mainWindowVm.HideDialog();
-            page.DataContext = vm;
-            mainWindowVm.CurrentPage = page;
-            mainWindowVm.Title = vm.Title;
-        }
-
         public void NavigateTo<TUserControl, TViewModel>() 
             where TUserControl : UserControl where TViewModel : BasePageViewModel
         {
@@ -39,23 +29,14 @@ namespace APIGirrafe.UI.Navigation
             NavigateTo(page, vm);
         }
 
-        public void NavigateTo<TUserControl, TViewModel>(Action<TViewModel> postNavigationAction)
+        public void NavigateTo<TUserControl, TViewModel>(Action<TViewModel> preNavigationAction)
           where TUserControl : UserControl where TViewModel : BasePageViewModel
         {
             var page = _kernel.Get<TUserControl>();
             var vm = _kernel.Get<TViewModel>();
 
+            preNavigationAction.Invoke(vm);
             NavigateTo(page, vm);
-            postNavigationAction.Invoke(vm);
-        }
-
-        [Obsolete("Consider passing the type of usercontrol and viewmodel as arguments so the navigation helper can create new instances of the objects itself")]
-        public void ShowModal(UserControl content, BasePageViewModel vm)
-        {
-            var mainWindowVm = GetMainWindowViewModel();
-            mainWindowVm.HideDialog();
-            content.DataContext = vm;
-            mainWindowVm.ShowDialog(content);
         }
 
         public void ShowModal<TUserControl, TViewModel>()
@@ -67,14 +48,14 @@ namespace APIGirrafe.UI.Navigation
             ShowModal(page, vm);
         }
 
-        public void ShowModal<TUserControl, TViewModel>(Action<TViewModel> postNavigationAction)
+        public void ShowModal<TUserControl, TViewModel>(Action<TViewModel> preNavigationAction)
             where TUserControl : UserControl where TViewModel : BasePageViewModel
         {
             var page = _kernel.Get<TUserControl>();
             var vm = _kernel.Get<TViewModel>();
 
+            preNavigationAction.Invoke(vm);
             NavigateTo(page, vm);
-            postNavigationAction.Invoke(vm);
         }
 
 
@@ -93,6 +74,23 @@ namespace APIGirrafe.UI.Navigation
             }
 
             return vm;
+        }
+
+        private void ShowModal(UserControl content, BasePageViewModel vm)
+        {
+            var mainWindowVm = GetMainWindowViewModel();
+            mainWindowVm.HideDialog();
+            content.DataContext = vm;
+            mainWindowVm.ShowDialog(content);
+        }
+
+        private void NavigateTo(UserControl page, BasePageViewModel vm)
+        {
+            var mainWindowVm = GetMainWindowViewModel();
+            mainWindowVm.HideDialog();
+            page.DataContext = vm;
+            mainWindowVm.CurrentPage = page;
+            mainWindowVm.Title = vm.Title;
         }
     }
 }
