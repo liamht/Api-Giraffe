@@ -63,6 +63,12 @@ namespace APIGirrafe.Domain
                 {
                     RequestUri = new Uri(this.Url)
                 };
+
+                foreach (var header in Headers)
+                {
+                    request.Headers.Add(header.Name, header.Value);
+                }
+
                 var response = await client.SendAsync(request);
                 return await response.Content.ReadAsStringAsync();
             }

@@ -1,5 +1,5 @@
 ﻿using APIGirrafe.Data.UnitOfWork;
-using System.Threading.Tasks;
+using System.Linq;
 
 namespace APIGirrafe.ApplicationServices.Requests.Commands.DeleteRequestGroup
 {
@@ -12,10 +12,14 @@ namespace APIGirrafe.ApplicationServices.Requests.Commands.DeleteRequestGroup
             _uow = uow;
         }
 
-        public async Task ExecuteAsync(int requestGroupId)
+        public void Execute(int requestGroupId)
         {
-            var group = _uow.RequestGroups.FindAsync(requestGroupId);
-            _uow.RequestGroups.Remove(await group);
+            var group = _uow.RequestGroups.Find(requestGroupId);
+            var requests = _uow.Requests.Where(c => c.GroupId == group.Id);
+
+            _uow.Requests.RemoveRange(requests);
+            _uow.RequestGroups.Remove(group);
+            _uow.SaveChanges();
         }
     }
 }

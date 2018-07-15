@@ -136,9 +136,9 @@ namespace APIGirrafe.UI.ViewModels
 
         private Action GetDeleteGroupAction(int requestGroupId)
         {
-            return async () =>
+            return () =>
             {
-                await _deleteGroupCommand.ExecuteAsync(requestGroupId);
+                _deleteGroupCommand.Execute(requestGroupId);
                 _navigation.RefreshMenu();
             };
         }
