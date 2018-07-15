@@ -8,6 +8,12 @@ namespace APIGirrafe.UI.DesignTimeViewModels
     {
         public ICommand GetResponseCommand { get; set; }
 
+        public ICommand AddHeaderCommand { get; set; }
+
+        public ICommand DeleteHeaderCommand { get; set; }
+
+        public ICommand EditHeaderCommand { get; set; }
+
         public string Url { get; set; }
 
         public string Response { get; set; }

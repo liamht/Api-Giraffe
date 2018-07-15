@@ -14,7 +14,11 @@
              VerticalAlignment="Stretch"
              d:DataContext="{d:DesignInstance Type= designTimeViewModels:CurrentRequestViewModel , IsDesignTimeCreatable=True}"
              >
-
+    
+    <UserControl.Resources>
+        <local:BindingProxy x:Key="DataContextProxy" Data="{Binding}" />
+    </UserControl.Resources>
+    
     <Grid HorizontalAlignment="Stretch">
         <Grid.RowDefinitions>
             <RowDefinition x:Name="UrlHeaderRow" Height="25px"></RowDefinition>
@@ -26,59 +30,62 @@
             <RowDefinition x:Name="Button" Height="50px"></RowDefinition>
         </Grid.RowDefinitions>
 
-            <TextBlock  Grid.Row="0" FontSize="16">Url</TextBlock>
+        <TextBlock  Grid.Row="0" FontSize="16">Url</TextBlock>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-                <materialDesign:PackIcon VerticalAlignment="Center" Grid.Column="0" Kind="Web" Foreground="{Binding ElementName=UrlTextBox, Path=BorderBrush}" />
-                <TextBox Grid.Column="1" x:Name="UrlTextBox" HorizontalAlignment="Stretch" Height="30" MinWidth="300"   Margin="15 0" 
+            <materialDesign:PackIcon VerticalAlignment="Center" Grid.Column="0" Kind="Web" Foreground="{Binding ElementName=UrlTextBox, Path=BorderBrush}" />
+            <TextBox Grid.Column="1" x:Name="UrlTextBox" HorizontalAlignment="Stretch" Height="30" MinWidth="300"   Margin="15 0" 
                      materialDesign:HintAssist.Hint="Url" VerticalContentAlignment="Center" Text="{Binding Url, Mode=TwoWay}" ></TextBox>
         </Grid>
         <TextBlock Grid.Row="2" FontSize="16">Headers</TextBlock>
-            <StackPanel Grid.Row="3"  Margin="50 0">
-                <Grid HorizontalAlignment="Stretch">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" HorizontalAlignment="Center" FontWeight="Bold" Text="Name" />
-                    <TextBlock Grid.Column="1" HorizontalAlignment="Center" FontWeight="Bold">Value</TextBlock>
-                </Grid>
-                <ListView ItemsSource="{Binding RequestHeaders}" HorizontalAlignment="Stretch" >
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <Border>
-                                <Grid HorizontalAlignment="Stretch" Margin="0">
+        <StackPanel Grid.Row="3"  Margin="50 0">
+            <Grid HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" HorizontalAlignment="Center" FontWeight="Bold" Text="Name" />
+                <TextBlock Grid.Column="1" HorizontalAlignment="Center" FontWeight="Bold">Value</TextBlock>
+            </Grid>
+            <ListView ItemsSource="{Binding RequestHeaders}" DataContext="{Binding}" HorizontalAlignment="Stretch">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Tag="{Binding Path=Name, ElementName=RootElement}">
+                            <Grid HorizontalAlignment="Stretch" Margin="0">
                                 <Grid.ContextMenu>
                                     <ContextMenu>
-                                        <MenuItem Margin="0"
-                                                            Header="Edit Header"
-                                                            Command="{Binding EditHeaderCommand}" CommandParameter="{Binding Id}"/>
-                                        <MenuItem Margin="0"
-                                                            Header="Delete Header"
-                                                            Command="{Binding DeleteHeaderCommand}" CommandParameter="{Binding Id}"/>
+                                        <MenuItem   Margin="0"
+                                                    Header="Edit Header"
+                                                    Command="{Binding Source={StaticResource DataContextProxy}, Path=Data.EditHeaderCommand}"
+                                                    CommandParameter="{Binding Id}"/>
+                                        
+                                        <MenuItem   Margin="0"
+                                                    Header="Delete Header"
+                                                    Command="{Binding Source={StaticResource DataContextProxy}, Path=Data.DeleteHeaderCommand}"
+                                                    CommandParameter="{Binding Id}"/>
                                     </ContextMenu>
                                 </Grid.ContextMenu>
                                 <Grid.ColumnDefinitions>
-                                        <ColumnDefinition></ColumnDefinition>
-                                        <ColumnDefinition></ColumnDefinition>
-                                    </Grid.ColumnDefinitions>
-                                    <TextBlock Grid.Column="0" HorizontalAlignment="Center" Text="{Binding Name}" />
-                                    <TextBlock Grid.Column="1" HorizontalAlignment="Center" Text="{Binding Value}"></TextBlock>
-                                </Grid>
-                            </Border>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                    <ListView.ItemContainerStyle>
-                        <Style TargetType="ListViewItem">
-                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                        </Style>
-                    </ListView.ItemContainerStyle>
-                </ListView>
-                <Button Width="150" HorizontalAlignment="Right" Margin="0 15 0 0" Style="{StaticResource MaterialDesignFlatButton}" Command="{Binding AddHeaderCommand}">Add Header</Button>
-            </StackPanel>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" HorizontalAlignment="Center" Text="{Binding Name}" />
+                                <TextBlock Grid.Column="1" HorizontalAlignment="Center" Text="{Binding Value}"></TextBlock>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    </Style>
+                </ListView.ItemContainerStyle>
+            </ListView>
+            <Button Width="150" HorizontalAlignment="Right" Margin="0 15 0 0" Style="{StaticResource MaterialDesignFlatButton}" Command="{Binding AddHeaderCommand}">Add Header</Button>
+        </StackPanel>
 
 
         <TextBlock Grid.Row="4" FontSize="16">Response</TextBlock>
@@ -92,15 +99,15 @@
                  materialDesign:HintAssist.Hint="The response from the server will show here when a request is sent."
                  Text="{Binding Response}"
                  >
-                <TextBox.Style>
-                    <Style TargetType="TextBox">
-                        <Setter Property="VerticalAlignment" Value="Stretch"></Setter>
-                        <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
-                        <Setter Property="BorderThickness" Value="0"></Setter>
-                    </Style>
-                </TextBox.Style>
-           </TextBox>
-       
+            <TextBox.Style>
+                <Style TargetType="TextBox">
+                    <Setter Property="VerticalAlignment" Value="Stretch"></Setter>
+                    <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
+                    <Setter Property="BorderThickness" Value="0"></Setter>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
+
 
 
         <Button Grid.Row="6" HorizontalAlignment="Right" Margin="0 0 50 0" Command="{Binding GetResponseCommand}">Send Request</Button>

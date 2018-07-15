@@ -168,7 +168,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="DesignTimeViewModels\NewRequestViewModel.cs" />
-    <Compile Include="ViewModels\ActionCommand.cs" />
+    <Compile Include="ViewModels\Commands\DeleteCommand.cs" />
+    <Compile Include="ViewModels\Commands\ActionCommand.cs" />
     <Compile Include="ViewModels\BasePageViewModel.cs" />
     <Compile Include="ViewModels\CurrentRequestViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
@@ -180,6 +181,7 @@
     <Compile Include="ViewModels\NewGroupViewModel.cs" />
     <Compile Include="ViewModels\NewItemViewModel.cs" />
     <Compile Include="ViewModels\NotifyableViewModel.cs" />
+    <Compile Include="Views\BindingProxy.cs" />
     <Compile Include="Views\NewHeaderDialog.xaml.cs">
       <DependentUpon>NewHeaderDialog.xaml</DependentUpon>
     </Compile>

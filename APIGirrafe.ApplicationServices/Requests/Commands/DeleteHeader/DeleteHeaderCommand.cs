@@ -1,6 +1,8 @@
 ﻿using APIGirrafe.Data.UnitOfWork;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace APIGirrafe.ApplicationServices.Requests.Commands.DeleteHeader

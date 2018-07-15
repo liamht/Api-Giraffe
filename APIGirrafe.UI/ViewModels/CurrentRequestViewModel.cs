@@ -9,7 +9,9 @@ using APIGirrafe.ApplicationServices.Requests.Queries.GetRequestDetails;
 using APIGirrafe.Domain;
 using APIGirrafe.UI.Navigation;
 using APIGirrafe.UI.Views;
+using APIGirrafe.UI.ViewModels.Commands;
 using Header = APIGirrafe.ApplicationServices.Requests.Queries.GetRequestDetails.Header;
+using System.Linq;
 
 namespace APIGirrafe.UI.ViewModels
 {
@@ -95,7 +97,7 @@ namespace APIGirrafe.UI.ViewModels
             RequestHeaders = new ObservableCollection<Header>();
             GetResponseCommand = new ActionCommand(async () => await GetResponse());
             AddHeaderCommand = new ActionCommand(() => ShowAddHeaderModal());
-            DeleteHeaderCommand = new ActionCommand<int>(headerId => DeleteHeader(headerId));
+            DeleteHeaderCommand = new DeleteCommand(headerId => DeleteHeader(headerId));
             
             _addHeaderCommand = addHeaderCommand;
             _updateRequestCommand = updateRequestCommand;
@@ -107,22 +109,26 @@ namespace APIGirrafe.UI.ViewModels
         private void DeleteHeader(int headerId)
         {
             _deleteHeaderCommand.Execute(headerId);
+            RefreshHeaders();
         }
 
         private void ShowAddHeaderModal()
         {
             var vm = new NewHeaderViewModel(_navigationHelper, _addHeaderCommand, _requestId);
-            vm.OnSuccessCallback += (sender, args) =>
+            vm.OnSuccessCallback += async (sender, args) =>
             {
-                AddHeaderFromViewModel(vm);
+                RefreshHeaders();
             };
 
             _navigationHelper.ShowModal(new NewHeaderDialog(), vm);
         }
 
-        private void AddHeaderFromViewModel(NewHeaderViewModel vm)
+        private void RefreshHeaders()
         {
-            RequestHeaders.Add(new Header() { Name = vm.ItemName, Value = vm.ItemValue });
+            var details = _getDetailsQuery.Execute(_requestId);
+            var headers = details.Headers;
+            RequestHeaders.Clear();
+            headers.ForEach(header => RequestHeaders.Add(header));
         }
 
         private async Task GetResponse()
@@ -140,14 +146,14 @@ namespace APIGirrafe.UI.ViewModels
             Response = await httprequest.GetResponse();
         }
 
-        public async Task LoadValues(int id)
+        public void LoadValues(int id)
         {
             if (id <= 0)
             {
                 throw new ArgumentException("Cannot fetch ID from database");
             }
 
-            var request = await _getDetailsQuery.ExecuteAsync(id);
+            var request = _getDetailsQuery.Execute(id);
 
             _requestId = request.Id;
             Url = request.Url;

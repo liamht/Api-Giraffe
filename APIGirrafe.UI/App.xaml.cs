@@ -86,8 +86,8 @@ namespace APIGirrafe.UI
             _container.Bind<IRepository<Request>>().To<RequestRepository>();
             _container.Bind<IRepository<Data.Entities.RequestGroup>>().To<RequestGroupRepository>();
             
-            var dbOptions = new DbContextOptionsBuilder().UseSqlite(@"Data Source=ApiTester.db");
-            _container.Bind<IUnitOfWork>().To<SqliteUnitOfWork>().WithConstructorArgument(dbOptions.Options);
+            var dbOptions = new DbContextOptionsBuilder().UseSqlite(@"Data Source=ApiGiraffe.db");
+            _container.Bind<IUnitOfWork>().To<SqliteUnitOfWork>().InSingletonScope().WithConstructorArgument(dbOptions.Options);
 
             _container.Bind<MainWindowViewModel>().To<MainWindowViewModel>().InSingletonScope()
                 .WithConstructorArgument<Func<NewRequestViewModel>>(() => _container.Get<NewRequestViewModel>())

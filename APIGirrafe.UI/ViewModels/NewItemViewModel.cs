@@ -1,5 +1,6 @@
 ﻿using System.Windows.Input;
 using APIGirrafe.UI.Navigation;
+using APIGirrafe.UI.ViewModels.Commands;
 
 namespace APIGirrafe.UI.ViewModels
 {

@@ -14,11 +14,11 @@ namespace APIGirrafe.ApplicationServices.Requests.Queries.GetRequestDetails
             _uow = uow;
         }
 
-        public async Task<RequestDetails> ExecuteAsync(int requestId)
+        public RequestDetails Execute(int requestId)
         {
-            var request = await _uow.Requests
+            var request = _uow.Requests
                     .Include(c => c.Headers)
-                    .SingleAsync(c => c.Id == requestId);
+                    .Single(c => c.Id == requestId);
 
             var headers = request.Headers.Select(header => new Header()
             {

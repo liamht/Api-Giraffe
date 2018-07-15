@@ -8,7 +8,7 @@ using APIGirrafe.UI.Navigation;
 using APIGirrafe.UI.Views;
 using Menu = APIGirrafe.UI.ViewModels.Menus.Menu;
 using APIGirrafe.ApplicationServices.Requests.Queries.GetRequestGroups;
-using System.Threading.Tasks;
+using APIGirrafe.UI.ViewModels.Commands;
 using APIGirrafe.ApplicationServices.Requests.Commands.DeleteRequestGroup;
 
 namespace APIGirrafe.UI.ViewModels
@@ -145,12 +145,12 @@ namespace APIGirrafe.UI.ViewModels
 
         private Action GetNavigateToCurrentRequestPageAction(int requestId, string requestName)
         {
-            return async () =>
+            return () =>
             {
                 var vm = _currentRequestViewModelCreator.Invoke();
                 vm.Name = requestName;
                 _navigation.NavigateTo(new CurrentRequestPage(), vm);
-                await vm.LoadValues(requestId);
+                vm.LoadValues(requestId);
             };
         }
     }
