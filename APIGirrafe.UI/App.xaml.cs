@@ -92,6 +92,8 @@ namespace APIGirrafe.UI
             _container.Bind<MainWindowViewModel>().To<MainWindowViewModel>().InSingletonScope()
                 .WithConstructorArgument<Func<NewRequestViewModel>>(() => _container.Get<NewRequestViewModel>())
                 .WithConstructorArgument<Func<CurrentRequestViewModel>>(() => _container.Get<CurrentRequestViewModel>());
+
+            _container.Bind<IKernel>().ToConstant(_container);
         }
     }
 }
