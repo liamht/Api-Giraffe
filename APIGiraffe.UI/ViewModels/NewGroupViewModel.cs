@@ -17,7 +17,7 @@ namespace APIGiraffe.UI.ViewModels
 
         public override void OnSuccess()
         {
-            _command.ExecuteAsync(ItemName);
+            _command.Execute(ItemName);
 
             Navigation.DestroyModal();
             Navigation.RefreshMenu();

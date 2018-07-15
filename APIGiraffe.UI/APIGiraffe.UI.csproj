@@ -264,7 +264,7 @@
       <Name>APIGiraffe.Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\APIGiraffe.Domain\APIGiraffe.Domain.csproj">
-      <Project>{447DD49C-35CC-495D-90AD-537FCB4563D7}</Project>
+      <Project>{447dd49c-35cc-495d-90ad-537fcb4563d7}</Project>
       <Name>APIGiraffe.Domain</Name>
     </ProjectReference>
   </ItemGroup>
