@@ -114,13 +114,13 @@ namespace APIGirrafe.UI.ViewModels
 
         private void ShowAddHeaderModal()
         {
-            var vm = new NewHeaderViewModel(_navigationHelper, _addHeaderCommand, _requestId);
-            vm.OnSuccessCallback += (sender, args) =>
+            _navigationHelper.ShowModal<NewHeaderDialog, NewHeaderViewModel>(vm =>
             {
-                RefreshHeaders();
-            };
-
-            _navigationHelper.ShowModal(new NewHeaderDialog(), vm);
+                vm.OnSuccessCallback += (sender, args) =>
+                {
+                    RefreshHeaders();
+                };
+            });
         }
 
         private void RefreshHeaders()

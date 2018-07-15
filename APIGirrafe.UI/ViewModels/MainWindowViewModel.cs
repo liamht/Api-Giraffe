@@ -15,13 +15,9 @@ namespace APIGirrafe.UI.ViewModels
 {
     public class MainWindowViewModel : NotifyableViewModel
     {
-        public event EventHandler OnNewGroupButtonClicked;
-
         private readonly INavigationHelper _navigation;
         private readonly IGetRequestGroupsQuery _getGroupsQuery;
         private readonly IDeleteRequestGroupCommand _deleteGroupCommand;
-        private readonly Func<NewRequestViewModel> _newRequestViewModelCreator;
-        private readonly Func<CurrentRequestViewModel> _currentRequestViewModelCreator;
 
         #region Properties
 
@@ -84,16 +80,13 @@ namespace APIGirrafe.UI.ViewModels
 
         #endregion
 
-        public MainWindowViewModel(IGetRequestGroupsQuery getGroupsQuery, IDeleteRequestGroupCommand deleteGroupCommand, INavigationHelper navigation, 
-            Func<NewRequestViewModel> newRequestInitiator, Func<CurrentRequestViewModel> currentRequestInitiator)
+        public MainWindowViewModel(IGetRequestGroupsQuery getGroupsQuery, IDeleteRequestGroupCommand deleteGroupCommand, INavigationHelper navigation)
         {
             _navigation = navigation;
             _getGroupsQuery = getGroupsQuery;
             _deleteGroupCommand = deleteGroupCommand;
-            _newRequestViewModelCreator = newRequestInitiator;
-            _currentRequestViewModelCreator = currentRequestInitiator;
 
-            NewRequestCommand = new ActionCommand(() => OnNewGroupButtonClicked?.Invoke(this, new EventArgs()));
+            NewRequestCommand = new ActionCommand(() => _navigation.ShowModal<NewRequestDialog, NewRequestViewModel>());
         }
 
         public void ShowDialog(UserControl dialogContent)
@@ -128,9 +121,7 @@ namespace APIGirrafe.UI.ViewModels
         {
             return () =>
             {
-                var vm = _newRequestViewModelCreator.Invoke();
-                vm.SetGroupId(requestGroupId);
-                _navigation.ShowModal(new NewRequestDialog(), vm);
+                _navigation.ShowModal<NewRequestDialog, NewRequestViewModel>(vm => vm.SetGroupId(requestGroupId));
             };
         }
 
@@ -147,10 +138,11 @@ namespace APIGirrafe.UI.ViewModels
         {
             return () =>
             {
-                var vm = _currentRequestViewModelCreator.Invoke();
-                vm.Name = requestName;
-                _navigation.NavigateTo(new CurrentRequestPage(), vm);
-                vm.LoadValues(requestId);
+                _navigation.NavigateTo<CurrentRequestPage, CurrentRequestViewModel>(vm =>
+                {
+                    vm.Name = requestName;
+                    vm.LoadValues(requestId);
+                });
             };
         }
     }

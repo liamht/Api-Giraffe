@@ -43,10 +43,6 @@ namespace APIGirrafe.UI
             _navigation = _container.Get<INavigationHelper>();
 
             var viewmodel = _container.Get<MainWindowViewModel>();
-            viewmodel.OnNewGroupButtonClicked += (sender, args) =>
-            {
-                _navigation.ShowModal(new CreateGroupDialog(), _container.Get<NewGroupViewModel>());
-            };
 
             var window = new MainWindow
             {
