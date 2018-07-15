@@ -115,7 +115,7 @@ namespace APIGirrafe.UI.ViewModels
         private void ShowAddHeaderModal()
         {
             var vm = new NewHeaderViewModel(_navigationHelper, _addHeaderCommand, _requestId);
-            vm.OnSuccessCallback += async (sender, args) =>
+            vm.OnSuccessCallback += (sender, args) =>
             {
                 RefreshHeaders();
             };
