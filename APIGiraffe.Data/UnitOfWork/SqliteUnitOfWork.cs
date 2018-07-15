@@ -6,11 +6,11 @@ namespace APIGiraffe.Data.UnitOfWork
 {
     public class SqliteUnitOfWork : DbContext, IUnitOfWork
     {
-        public DbSet<Request> Requests { get; set; }
+        public virtual DbSet<Request> Requests { get; set; }
 
-        public DbSet<RequestGroup> RequestGroups { get; set; }
+        public virtual DbSet<RequestGroup> RequestGroups { get; set; }
 
-        public DbSet<Header> Headers { get; set; }
+        public virtual DbSet<Header> Headers { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
