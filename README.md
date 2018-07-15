@@ -8,7 +8,7 @@ Based on [SoapUI](https://www.soapui.org/) and [Postman](https://www.getpostman.
 ## Features:
 - Send HTTP requests to any URL, saving your request as you make changes to your request.
 - Create groups of API calls, allowing you to seperate out calls to your live and test environments.
-- (Coming soon) Save headers into your API calls, allowing you to authorise with your API in each send.
+- Save headers into your API calls, allowing you to authorise with your API in each send.
 - (Coming soon) Add custom parameters into your URL's, making it easier to have a {{BaseApiUrl}} or similar.
 
 ## How to use:
