@@ -1,4 +1,5 @@
-﻿using APIGiraffe.Data.UnitOfWork;
+﻿using System;
+using APIGiraffe.Data.UnitOfWork;
 
 namespace APIGiraffe.ApplicationServices.Requests.Commands.DeleteHeader
 {
@@ -14,6 +15,11 @@ namespace APIGiraffe.ApplicationServices.Requests.Commands.DeleteHeader
         public void Execute(int headerId)
         {
             var header = _uow.Headers.Find(headerId);
+
+            if (header == null)
+            {
+                throw new ArgumentOutOfRangeException(nameof(headerId), "Cannot find requestGroup in Db");
+            }
 
             _uow.Headers.Remove(header);
             _uow.SaveChanges();

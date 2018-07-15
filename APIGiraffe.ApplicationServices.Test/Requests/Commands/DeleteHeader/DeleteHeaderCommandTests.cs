@@ -24,6 +24,9 @@ namespace APIGiraffe.ApplicationServices.Test.Requests.Commands.DeleteHeader
             _headerSet.As<IQueryable<Header>>().Setup(c => c.Provider).Returns(headers.Provider);
             _headerSet.As<IQueryable<Header>>().Setup(c => c.Expression).Returns(headers.Expression);
             _headerSet.As<IQueryable<Header>>().Setup(c => c.ElementType).Returns(headers.ElementType);
+            _headerSet.As<IQueryable<Header>>().Setup(c => c.GetEnumerator()).Returns(headers.GetEnumerator());
+
+            _headerSet.Setup(c => c.Find(1)).Returns(headers.Single(c => c.Id == 1));
 
             _uow = new Mock<IUnitOfWork>();
             _uow.Setup(u => u.Headers).Returns(_headerSet.Object);
@@ -42,7 +45,7 @@ namespace APIGiraffe.ApplicationServices.Test.Requests.Commands.DeleteHeader
         [Fact]
         public void Execute_WhenHeaderCannotBeFound_ThrowsException()
         {
-            _subject.Execute(99);
+            Assert.Throws<ArgumentOutOfRangeException>(() => _subject.Execute(99));
         }
 
         [Fact]
