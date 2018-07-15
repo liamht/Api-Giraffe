@@ -63,7 +63,7 @@ namespace APIGirrafe.UI
         private void BindKernel()
         {
             _container = new StandardKernel();
-            _container.Bind<INavigationHelper>().To<NavigationHelper>().WithConstructorArgument<Func<CurrentRequestViewModel>>(() => _container.Get<CurrentRequestViewModel>());
+            _container.Bind<INavigationHelper>().To<NavigationHelper>().WithConstructorArgument(_container);
 
             _container.Bind<IHeaderFactory>().To<HeaderFactory>();
             _container.Bind<IRequestFactory>().To<RequestFactory>();
@@ -88,8 +88,6 @@ namespace APIGirrafe.UI
             _container.Bind<MainWindowViewModel>().To<MainWindowViewModel>().InSingletonScope()
                 .WithConstructorArgument<Func<NewRequestViewModel>>(() => _container.Get<NewRequestViewModel>())
                 .WithConstructorArgument<Func<CurrentRequestViewModel>>(() => _container.Get<CurrentRequestViewModel>());
-
-            _container.Bind<IKernel>().ToConstant(_container);
         }
     }
 }
