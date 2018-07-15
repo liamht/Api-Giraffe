@@ -21,9 +21,9 @@ namespace APIGiraffe.ApplicationServices.Test.Requests.Commands.DeleteHeader
             var headers = GetHeaders().AsQueryable();
 
             _headerSet = new Mock<DbSet<Header>>();
-            _headerSet.As<IQueryable<RequestGroup>>().Setup(c => c.Provider).Returns(headers.Provider);
-            _headerSet.As<IQueryable<RequestGroup>>().Setup(c => c.Expression).Returns(headers.Expression);
-            _headerSet.As<IQueryable<RequestGroup>>().Setup(c => c.ElementType).Returns(headers.ElementType);
+            _headerSet.As<IQueryable<Header>>().Setup(c => c.Provider).Returns(headers.Provider);
+            _headerSet.As<IQueryable<Header>>().Setup(c => c.Expression).Returns(headers.Expression);
+            _headerSet.As<IQueryable<Header>>().Setup(c => c.ElementType).Returns(headers.ElementType);
 
             _uow = new Mock<IUnitOfWork>();
             _uow.Setup(u => u.Headers).Returns(_headerSet.Object);
