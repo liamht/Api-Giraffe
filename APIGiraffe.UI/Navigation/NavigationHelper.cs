@@ -55,7 +55,7 @@ namespace APIGiraffe.UI.Navigation
             var vm = _kernel.Get<TViewModel>();
 
             preNavigationAction.Invoke(vm);
-            NavigateTo(page, vm);
+            ShowModal(page, vm);
         }
 
 

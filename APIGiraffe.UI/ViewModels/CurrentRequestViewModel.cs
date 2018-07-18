@@ -104,7 +104,7 @@ namespace APIGiraffe.UI.ViewModels
         public CurrentRequestViewModel(IAddNewHeaderCommand addHeaderCommand, IUpdateRequestCommand updateRequestCommand, 
             IDeleteHeaderCommand deleteHeaderCommand, IGetRequestDetailsQuery getDetailsQuery, INavigationHelper nav)
         {
-           // Response = "The response from the server will show here when a request is sent";
+            Response = "The response from the server will show here when a request is sent";
 
             RequestHeaders = new ObservableCollection<Header>();
             GetResponseCommand = new ActionCommand(async () =>
