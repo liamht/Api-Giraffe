@@ -133,14 +133,12 @@
                             </ListBox>
                         </StackPanel>
                     </Grid>
-                    <StackPanel Grid.Column="1">
-
-
-                        <Grid>
-                            <TextBlock Margin="15 5 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="{DynamicResource MaterialDesignBody}" FontSize="22" Text="{Binding Title}"></TextBlock>
+                 
+                        <Grid Grid.Column ="1">
+                            <TextBlock Margin="15 5 0 0" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="{DynamicResource MaterialDesignBody}" FontSize="22" Text="{Binding Title}"></TextBlock>
                         </Grid>
-                        <ContentControl
-                                Margin="15"
+                        <ContentControl Grid.Column="1"
+                                Margin="15 50 15 15"
                                 x:Name="CurrentPage" 
                                 HorizontalAlignment="Stretch"
                                 VerticalAlignment="Stretch"
@@ -148,7 +146,6 @@
                                 VerticalContentAlignment="Stretch"
                                 Content="{Binding CurrentPage}">
                         </ContentControl>
-                    </StackPanel>
                 </Grid>
             </DockPanel>
         </Grid>

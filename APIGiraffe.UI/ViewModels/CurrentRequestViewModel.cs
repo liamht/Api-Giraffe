@@ -43,6 +43,18 @@ namespace APIGiraffe.UI.ViewModels
 
         #region Page properties
 
+        private bool _isRequestLoading;
+
+        public bool IsRequestLoading
+        {
+            get => _isRequestLoading;
+            set
+            {
+                _isRequestLoading = value;
+                NotifyPropertyChanged(nameof(IsRequestLoading));
+            }
+        }
+
         private string _url;
 
         public string Url
@@ -92,12 +104,17 @@ namespace APIGiraffe.UI.ViewModels
         public CurrentRequestViewModel(IAddNewHeaderCommand addHeaderCommand, IUpdateRequestCommand updateRequestCommand, 
             IDeleteHeaderCommand deleteHeaderCommand, IGetRequestDetailsQuery getDetailsQuery, INavigationHelper nav)
         {
-            Response = "The response from the server will show here when a request is sent";
+           // Response = "The response from the server will show here when a request is sent";
 
             RequestHeaders = new ObservableCollection<Header>();
-            GetResponseCommand = new ActionCommand(async () => await GetResponse());
-            AddHeaderCommand = new ActionCommand(() => ShowAddHeaderModal());
-            DeleteHeaderCommand = new DeleteCommand(headerId => DeleteHeader(headerId));
+            GetResponseCommand = new ActionCommand(async () =>
+            {
+                ShowLoadingSpinner();
+                await GetResponse();
+                HideLoadingSpinner();
+            });
+            AddHeaderCommand = new ActionCommand(ShowAddHeaderModal);
+            DeleteHeaderCommand = new DeleteCommand(DeleteHeader);
             
             _addHeaderCommand = addHeaderCommand;
             _updateRequestCommand = updateRequestCommand;
@@ -160,6 +177,17 @@ namespace APIGiraffe.UI.ViewModels
 
             RequestHeaders = request.Headers == null ? new ObservableCollection<Header>() : new ObservableCollection<Header>(request.Headers);
             _changesEnabled = true;
+        }
+
+        private void ShowLoadingSpinner()
+        {
+            IsRequestLoading = true;
+            Response = string.Empty;
+        }
+
+        private void HideLoadingSpinner()
+        {
+            IsRequestLoading = false;
         }
     }
 }

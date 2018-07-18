@@ -14,11 +14,12 @@
              VerticalAlignment="Stretch"
              d:DataContext="{d:DesignInstance Type= designTimeViewModels:CurrentRequestViewModel , IsDesignTimeCreatable=True}"
              >
-    
+
     <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
         <local:BindingProxy x:Key="DataContextProxy" Data="{Binding}" />
     </UserControl.Resources>
-    
+
     <Grid HorizontalAlignment="Stretch">
         <Grid.RowDefinitions>
             <RowDefinition x:Name="UrlHeaderRow" Height="25px"></RowDefinition>
@@ -26,22 +27,30 @@
             <RowDefinition x:Name="ParameterHeaderRow" Height="25px"></RowDefinition>
             <RowDefinition x:Name="ParameterRow" Height="auto"></RowDefinition>
             <RowDefinition x:Name="BodyHeaderRow" Height="25px"></RowDefinition>
-            <RowDefinition x:Name="BodyRow" Height="8*"></RowDefinition>
-            <RowDefinition x:Name="Button" Height="50px"></RowDefinition>
+            <RowDefinition x:Name="BodyRow" Height="*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <TextBlock  Grid.Row="0" FontSize="16">Url</TextBlock>
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"></ColumnDefinition>
-                <ColumnDefinition Width="Auto"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <materialDesign:PackIcon VerticalAlignment="Center" Grid.Column="0" Kind="Web" Foreground="{Binding ElementName=UrlTextBox, Path=BorderBrush}" />
-            <TextBox Grid.Column="1" x:Name="UrlTextBox" HorizontalAlignment="Stretch" Height="30" MinWidth="300"   Margin="15 0" 
-                     materialDesign:HintAssist.Hint="Url" VerticalContentAlignment="Center" Text="{Binding Url, Mode=TwoWay}" ></TextBox>
-        </Grid>
+        <TextBlock Grid.Row="0" FontSize="16" HorizontalAlignment="Left">Url</TextBlock>
+
+
+          
+            <Grid Grid.Row="1" HorizontalAlignment="Stretch" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="8*"></ColumnDefinition>
+                    <ColumnDefinition Width="4*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>  
+                
+                <materialDesign:PackIcon Margin="5" VerticalAlignment="Center" Grid.Column="0" Kind="Web" Foreground="{Binding ElementName=UrlTextBox, Path=BorderBrush}" />
+
+                <TextBox Grid.Column="0" x:Name="UrlTextBox" HorizontalAlignment="Stretch" Height="30" MinWidth="300"   Margin="35 0" 
+                         materialDesign:HintAssist.Hint="Url" VerticalContentAlignment="Center" Text="{Binding Url, Mode=TwoWay}" ></TextBox>
+
+                <Button Grid.Column="1" VerticalAlignment="Center" Background="{StaticResource 'Button Color'}" HorizontalAlignment="Right" Margin="0 0 50 0" Command="{Binding GetResponseCommand}">Send Request</Button>
+
+            </Grid>
+
         <TextBlock Grid.Row="2" FontSize="16">Headers</TextBlock>
-        <StackPanel Grid.Row="3"  Margin="50 0">
+        <StackPanel Grid.Row="3" Margin="50 0" MaxHeight="125">
             <Grid HorizontalAlignment="Stretch">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
@@ -61,7 +70,7 @@
                                                     Header="Edit Header"
                                                     Command="{Binding Source={StaticResource DataContextProxy}, Path=Data.EditHeaderCommand}"
                                                     CommandParameter="{Binding Id}"/>
-                                        
+
                                         <MenuItem   Margin="0"
                                                     Header="Delete Header"
                                                     Command="{Binding Source={StaticResource DataContextProxy}, Path=Data.DeleteHeaderCommand}"
@@ -89,13 +98,39 @@
 
 
         <TextBlock Grid.Row="4" FontSize="16">Response</TextBlock>
-        <TextBox Grid.Row="5" VerticalContentAlignment="Top" VerticalAlignment="Stretch" TextWrapping="Wrap" HorizontalAlignment="Stretch"
+
+        <Grid Grid.Row="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+
+            <TextBox 
+                 VerticalContentAlignment="Top" 
+                 TextWrapping="Wrap" 
+                 HorizontalAlignment="Stretch"
                  Padding="15 0 15 15"
-                 MinWidth="280"
                  AcceptsReturn="True"
                  IsReadOnly="True"
-                 VerticalScrollBarVisibility="Auto"
-                 SpellCheck.IsEnabled="True"
+                 VerticalScrollBarVisibility="Visible"
+                 materialDesign:HintAssist.Hint="The response from the server will show here when a request is sent."
+                 Text="{Binding Response}"
+                 MaxHeight="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Grid}}, Path=Height}"
+                 >
+                <TextBox.Style>
+                    <Style TargetType="TextBox">
+                        <Setter Property="VerticalAlignment" Value="Stretch"></Setter>
+                        <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
+                        <Setter Property="BorderThickness" Value="0"></Setter>
+                    </Style>
+                </TextBox.Style>
+            </TextBox>
+        </Grid>
+        <TextBox Grid.Row="5" 
+                 VerticalContentAlignment="Top" 
+                 VerticalAlignment="Stretch" 
+                 TextWrapping="Wrap" 
+                 HorizontalAlignment="Stretch"
+                 Padding="15 0 15 15"
+                 AcceptsReturn="True"
+                 IsReadOnly="True"
+                 VerticalScrollBarVisibility="Visible"
                  materialDesign:HintAssist.Hint="The response from the server will show here when a request is sent."
                  Text="{Binding Response}"
                  >
@@ -108,9 +143,12 @@
             </TextBox.Style>
         </TextBox>
 
+        <StackPanel Visibility="{Binding IsRequestLoading, Converter={StaticResource BoolToVis}}" Grid.Row="5" Orientation="Horizontal" Height="100px" Margin="0 15 0 0" Width="300" VerticalAlignment="Top">
+            <ProgressBar VerticalAlignment="Top" Foreground="{StaticResource 'Button Color'}" Margin="5" Style="{DynamicResource MaterialDesignCircularProgressBar}" HorizontalAlignment="Center" IsIndeterminate="True" Value="0" />
+            <TextBlock VerticalAlignment="Top" Margin="10 8 0 0">Fetching your data from the server, please wait.</TextBlock>
+        </StackPanel>
 
 
-        <Button Grid.Row="6" HorizontalAlignment="Right" Margin="0 0 50 0" Command="{Binding GetResponseCommand}">Send Request</Button>
 
     </Grid>
 </UserControl>
