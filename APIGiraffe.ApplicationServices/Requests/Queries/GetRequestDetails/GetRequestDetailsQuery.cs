@@ -1,4 +1,5 @@
-﻿using APIGiraffe.Data.UnitOfWork;
+﻿using System;
+using APIGiraffe.Data.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
@@ -18,7 +19,12 @@ namespace APIGiraffe.ApplicationServices.Requests.Queries.GetRequestDetails
         {
             var request = _uow.Requests
                     .Include(c => c.Headers)
-                    .Single(c => c.Id == requestId);
+                    .SingleOrDefault(c => c.Id == requestId);
+
+            if (request == null)
+            {
+                throw new InvalidOperationException("A request with the Id provided could not be found");
+            }
 
             var headers = request.Headers.Select(header => new Header()
             {
