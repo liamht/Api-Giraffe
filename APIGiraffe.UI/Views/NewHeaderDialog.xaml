@@ -26,7 +26,7 @@
                 
                 <TextBlock Foreground="{StaticResource MaterialDesignBodyLight}" Margin="15" >Value:</TextBlock>
                 <TextBox Foreground="{StaticResource MaterialDesignBodyLight}" Text="{Binding ItemValue}" Margin="15 0 0 0"></TextBox>
-                <Button  Background="{StaticResource Button Color}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="15" Width="150" Command="{Binding OnConfirmCommand}">Create Group</Button>
+                <Button  Background="{StaticResource Button Color}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="15" Width="150" Command="{Binding OnConfirmCommand}">Create Header</Button>
             </StackPanel>
 
         </Grid>
