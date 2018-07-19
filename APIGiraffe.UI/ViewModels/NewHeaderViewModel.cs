@@ -25,10 +25,15 @@ namespace APIGiraffe.UI.ViewModels
             }
         }
 
-        public NewHeaderViewModel(INavigationHelper navigation, IAddNewHeaderCommand command, int requestId)
+        public NewHeaderViewModel(INavigationHelper navigation, IAddNewHeaderCommand command)
         : base(navigation)
         {
             _command = command;
+        }
+
+
+        public void ForRequest(int requestId)
+        {
             _requestId = requestId;
         }
 

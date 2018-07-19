@@ -133,6 +133,7 @@ namespace APIGiraffe.UI.ViewModels
         {
             _navigationHelper.ShowModal<NewHeaderDialog, NewHeaderViewModel>(vm =>
             {
+                vm.ForRequest(_requestId);
                 vm.OnSuccessCallback += (sender, args) =>
                 {
                     RefreshHeaders();
