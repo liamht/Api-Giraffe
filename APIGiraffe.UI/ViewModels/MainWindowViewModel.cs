@@ -9,15 +9,14 @@ using APIGiraffe.UI.Views;
 using Menu = APIGiraffe.UI.ViewModels.Menus.Menu;
 using APIGiraffe.ApplicationServices.Requests.Queries.GetRequestGroups;
 using APIGiraffe.UI.ViewModels.Commands;
-using APIGiraffe.ApplicationServices.Requests.Commands.DeleteRequestGroup;
+using APIGiraffe.UI.ViewModels.Menus.Factory;
 
 namespace APIGiraffe.UI.ViewModels
 {
     public class MainWindowViewModel : NotifyableViewModel
     {
-        private readonly INavigationHelper _navigation;
         private readonly IGetRequestGroupsQuery _getGroupsQuery;
-        private readonly IDeleteRequestGroupCommand _deleteGroupCommand;
+        private readonly IMenuGroupFactory _menuGroupFactory;
 
         #region Properties
 
@@ -76,17 +75,20 @@ namespace APIGiraffe.UI.ViewModels
             }
         }
 
+        private readonly IRequestMenuItemFactory _menuItemFactory;
+
         public ICommand NewRequestCommand { get; set; }
 
         #endregion
 
-        public MainWindowViewModel(IGetRequestGroupsQuery getGroupsQuery, IDeleteRequestGroupCommand deleteGroupCommand, INavigationHelper navigation)
+        public MainWindowViewModel(INavigationHelper navigation, IGetRequestGroupsQuery getGroupsQuery, 
+            IMenuGroupFactory menuGroupFactory, IRequestMenuItemFactory menuItemFactory)
         {
-            _navigation = navigation;
             _getGroupsQuery = getGroupsQuery;
-            _deleteGroupCommand = deleteGroupCommand;
+            _menuGroupFactory = menuGroupFactory;
+            _menuItemFactory = menuItemFactory;
 
-            NewRequestCommand = new ActionCommand(() => _navigation.ShowModal<NewRequestDialog, NewRequestViewModel>());
+            NewRequestCommand = new ActionCommand(navigation.ShowModal<NewRequestDialog, NewRequestViewModel>);
         }
 
         public void ShowDialog(UserControl dialogContent)
@@ -105,44 +107,15 @@ namespace APIGiraffe.UI.ViewModels
         {
             var groups = _getGroupsQuery.Execute();
 
-            var menuGroups = groups.Select(group => new MenuGroup(group.Name,
-                GetNewRequestDialogAction(group.Id),
-                GetDeleteGroupAction(group.Id),
-                group.Requests.Select(request => new RequestMenuItem(request.Name, request.Id, GetNavigateToCurrentRequestPageAction(request.Id, request.Name))).ToArray()
-            ));
+            var menuGroups = groups.Select(group =>
+            {
+                var menuItems = group.Requests.Select(c => _menuItemFactory.Create(c.Name, c.Id)).ToList();
+                return _menuGroupFactory.Create(group.Name, group.Id, menuItems);
+            });
 
             Menu = new Menu()
             {
                 Groups = new ObservableCollection<MenuGroup>(menuGroups)
-            };
-        }
-
-        private Action GetNewRequestDialogAction(int requestGroupId)
-        {
-            return () =>
-            {
-                _navigation.ShowModal<NewRequestDialog, NewRequestViewModel>(vm => vm.SetGroupId(requestGroupId));
-            };
-        }
-
-        private Action GetDeleteGroupAction(int requestGroupId)
-        {
-            return () =>
-            {
-                _deleteGroupCommand.Execute(requestGroupId);
-                _navigation.RefreshMenu();
-            };
-        }
-
-        private Action GetNavigateToCurrentRequestPageAction(int requestId, string requestName)
-        {
-            return () =>
-            {
-                _navigation.NavigateTo<CurrentRequestPage, CurrentRequestViewModel>(vm =>
-                {
-                    vm.Name = requestName;
-                    vm.LoadValues(requestId);
-                });
             };
         }
     }

@@ -19,6 +19,7 @@ using APIGiraffe.ApplicationServices.Requests.Commands.AddNewHeader.Factory;
 using APIGiraffe.ApplicationServices.Requests.Commands.AddNewRequest.Factory;
 using APIGiraffe.ApplicationServices.Requests.Commands.AddNewRequestGroup.Factory;
 using APIGiraffe.ApplicationServices.Requests.Commands.DeleteHeader;
+using APIGiraffe.UI.ViewModels.Menus.Factory;
 
 namespace APIGiraffe.UI
 {
@@ -81,7 +82,11 @@ namespace APIGiraffe.UI
 
             _container.Bind<IRepository<Request>>().To<RequestRepository>();
             _container.Bind<IRepository<Data.Entities.RequestGroup>>().To<RequestGroupRepository>();
-            
+
+
+            _container.Bind<IMenuGroupFactory>().To<MenuGroupFactory>();
+            _container.Bind<IRequestMenuItemFactory>().To<RequestMenuItemFactory>();
+
             var dbOptions = new DbContextOptionsBuilder().UseSqlite(@"Data Source=ApiGiraffe.db");
             _container.Bind<IUnitOfWork>().To<SqliteUnitOfWork>().InSingletonScope().WithConstructorArgument(dbOptions.Options);
 

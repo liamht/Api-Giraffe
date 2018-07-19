@@ -7,8 +7,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{3D72EBD7-0B1B-4BF2-A247-F41994E771BB}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>APIGirrafe.UI</RootNamespace>
-    <AssemblyName>APIGirrafe.UI</AssemblyName>
+    <RootNamespace>APIGiraffe.UI</RootNamespace>
+    <AssemblyName>APIGiraffe.UI</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -173,6 +173,10 @@
     <Compile Include="ViewModels\BasePageViewModel.cs" />
     <Compile Include="ViewModels\CurrentRequestViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\Menus\Factory\IMenuGroupFactory.cs" />
+    <Compile Include="ViewModels\Menus\Factory\IRequestMenuItemFactory.cs" />
+    <Compile Include="ViewModels\Menus\Factory\MenuGroupFactory.cs" />
+    <Compile Include="ViewModels\Menus\Factory\RequestMenuItemFactory.cs" />
     <Compile Include="ViewModels\Menus\Menu.cs" />
     <Compile Include="ViewModels\Menus\MenuGroup.cs" />
     <Compile Include="ViewModels\Menus\RequestMenuItem.cs" />
