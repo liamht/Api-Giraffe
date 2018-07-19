@@ -28,7 +28,8 @@ namespace APIGiraffe.ApplicationServices.Test.Requests.Commands.RenameRequestGro
             _requestGroupSet.As<IQueryable<RequestGroup>>().Setup(c => c.GetEnumerator()).Returns(requestGroups.GetEnumerator());
 
             _requestGroupSet.Setup(c => c.Find(1)).Returns(requestGroups.Single(c => c.Id == 1));
-         
+            _requestGroupSet.Setup(c => c.Find(2)).Returns(requestGroups.Single(c => c.Id == 2));
+
             _uow = new Mock<IUnitOfWork>();
             _uow.Setup(u => u.RequestGroups).Returns(_requestGroupSet.Object);
 
@@ -51,7 +52,6 @@ namespace APIGiraffe.ApplicationServices.Test.Requests.Commands.RenameRequestGro
         {
             const string nameToSet = "New Name";
             _subject.Execute(1, nameToSet);
-
 
             _requestGroupSet.Verify(c => c.Update(It.IsAny<RequestGroup>()), Times.Once);
             _uow.Verify(c => c.SaveChanges(), Times.Once);
