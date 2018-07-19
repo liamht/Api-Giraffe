@@ -41,7 +41,7 @@ namespace APIGiraffe.ApplicationServices.Test.Requests.Commands.RenameRequestGro
             const string nameToSet = "New Name";
             _subject.Execute(1, nameToSet);
 
-            var unitOfWorkObject = _uow.Object.Requests.Find(1);
+            var unitOfWorkObject = _uow.Object.RequestGroups.Find(1);
 
             Assert.Equal(nameToSet, unitOfWorkObject.Name);
         }
@@ -60,12 +60,12 @@ namespace APIGiraffe.ApplicationServices.Test.Requests.Commands.RenameRequestGro
         [Fact]
         public void Execute_OnlyUpdatesMatchingElement()
         {
-            var originalValue = _uow.Object.Requests.Find(2).Name;
+            var originalValue = _uow.Object.RequestGroups.Find(2).Name;
 
             const string nameToSet = "New Name";
             _subject.Execute(1, nameToSet);
 
-            var postUpdateValue = _uow.Object.Requests.Find(2).Name;
+            var postUpdateValue = _uow.Object.RequestGroups.Find(2).Name;
 
             Assert.Equal(originalValue, postUpdateValue);
         }
