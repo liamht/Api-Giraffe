@@ -52,6 +52,8 @@ namespace APIGiraffe.ApplicationServices.Test.Requests.Commands.RenameRequestGro
             const string nameToSet = "New Name";
             _subject.Execute(1, nameToSet);
 
+
+            _requestGroupSet.Verify(c => c.Update(It.IsAny<RequestGroup>()), Times.Once);
             _uow.Verify(c => c.SaveChanges(), Times.Once);
         }
 
