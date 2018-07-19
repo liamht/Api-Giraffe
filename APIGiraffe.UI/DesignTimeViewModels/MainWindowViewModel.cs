@@ -30,7 +30,7 @@ namespace APIGiraffe.UI.DesignTimeViewModels
             {
                 Groups = new ObservableCollection<MenuGroup>()
                 {
-                    new MenuGroup("LIVE", null, null,
+                    new MenuGroup("LIVE", null, null, null,
                         new RequestMenuItem("Get Users", 1, () => {}),
                         new RequestMenuItem("Get User Stats", 1, () => {}),
                         new RequestMenuItem("Get User Comments", 1, () => {})

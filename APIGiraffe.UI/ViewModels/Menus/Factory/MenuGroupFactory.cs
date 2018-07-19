@@ -22,8 +22,17 @@ namespace APIGiraffe.UI.ViewModels.Menus.Factory
             return new MenuGroup(name,
                 GetNewRequestDialogAction(id),
                 GetDeleteGroupAction(id),
+                GetRenameGroupAction(id, name),
                 items.ToArray()
             );
+        }
+
+        private Action GetRenameGroupAction(int id, string name)
+        {
+            return () =>
+            {
+                _navigationHelper.ShowModal<RenameRequestGroupDialog, RenameGroupViewModel>(vm => vm.SetValues(id, name));
+            };
         }
 
         private Action GetNewRequestDialogAction(int requestGroupId)

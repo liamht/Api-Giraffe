@@ -3,11 +3,11 @@
 namespace APIGiraffe.UI.Views
 {
     /// <summary>
-    /// Interaction logic for CreateGroupDialog.xaml
+    /// Interaction logic for RenameRequestGroupDialog.xaml
     /// </summary>
-    public partial class CreateGroupDialog : UserControl
+    public partial class RenameRequestGroupDialog : UserControl
     {
-        public CreateGroupDialog()
+        public RenameRequestGroupDialog()
         {
             InitializeComponent();
         }

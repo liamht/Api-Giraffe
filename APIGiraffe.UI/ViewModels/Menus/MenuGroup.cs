@@ -11,6 +11,8 @@ namespace APIGiraffe.UI.ViewModels.Menus
 
         public ICommand DeleteGroupCommand { get; }
 
+        public ICommand RenameGroupCommand { get; }
+
         public string Name { get; set; }
 
         public ObservableCollection<RequestMenuItem> Items { get; set; }
@@ -27,10 +29,13 @@ namespace APIGiraffe.UI.ViewModels.Menus
             }
         }
 
-        public MenuGroup(string name, Action addNewItemAction, Action deleteGroupAction, params RequestMenuItem[] items)
+        public MenuGroup(string name, Action addNewItemAction, Action deleteGroupAction, 
+            Action renameGroupAction, params RequestMenuItem[] items)
         {
             AddNewItemCommand = new ActionCommand(addNewItemAction);
             DeleteGroupCommand = new ActionCommand(deleteGroupAction);
+            RenameGroupCommand = new ActionCommand(renameGroupAction);
+
             Items = new ObservableCollection<RequestMenuItem>(items);
             Name = name;
         }

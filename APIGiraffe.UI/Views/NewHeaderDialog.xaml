@@ -15,7 +15,7 @@
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <StackPanel Grid.Row="0" Background="{StaticResource Alert Background Color}" >
+            <StackPanel Grid.Row="0" Background="{StaticResource Create Alert Background Color}" >
                 <TextBlock VerticalAlignment="Center" FontSize="25" HorizontalAlignment="Center" TextAlignment="Center" Margin="15" Foreground="{StaticResource MaterialDesignBackground}">New Header</TextBlock>
                 <TextBlock Foreground="{StaticResource MaterialDesignBackground}" Margin="15 0 15 30" TextWrapping="Wrap" TextAlignment="Center">Please enter the name and value of the header you wish to add</TextBlock>
             </StackPanel>

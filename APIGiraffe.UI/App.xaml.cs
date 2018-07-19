@@ -19,6 +19,7 @@ using APIGiraffe.ApplicationServices.Requests.Commands.AddNewHeader.Factory;
 using APIGiraffe.ApplicationServices.Requests.Commands.AddNewRequest.Factory;
 using APIGiraffe.ApplicationServices.Requests.Commands.AddNewRequestGroup.Factory;
 using APIGiraffe.ApplicationServices.Requests.Commands.DeleteHeader;
+using APIGiraffe.ApplicationServices.Requests.Commands.RenameRequestGroup;
 using APIGiraffe.UI.ViewModels.Menus.Factory;
 
 namespace APIGiraffe.UI
@@ -74,6 +75,7 @@ namespace APIGiraffe.UI
             _container.Bind<IAddNewRequestCommand>().To<AddNewRequestCommand>();
             _container.Bind<IAddNewRequestGroupCommand>().To<AddNewRequestGroupCommand>();
             _container.Bind<IDeleteRequestGroupCommand>().To<DeleteRequestGroupCommand>();
+            _container.Bind<IRenameRequestGroupCommand>().To<RenameRequestGroupCommand>();
             _container.Bind<IUpdateRequestCommand>().To<UpdateRequestCommand>();
             _container.Bind<IDeleteHeaderCommand>().To<DeleteHeaderCommand>();
 

@@ -3,7 +3,7 @@ using APIGiraffe.Data.UnitOfWork;
 
 namespace APIGiraffe.ApplicationServices.Requests.Commands.RenameRequestGroup
 {
-    public class RenameRequestGroupCommand
+    public class RenameRequestGroupCommand : IRenameRequestGroupCommand
     {
         private IUnitOfWork _uow;
 

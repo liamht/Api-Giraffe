@@ -14,14 +14,18 @@
                     <Color x:Key="Blue">#365ca0</Color>
                     <Color x:Key="Light Blue">#5379BE</Color>
                     <Color x:Key="Deep Purple">#091737</Color>
-                    <Color x:Key="Light Purple">#4877fe</Color>
+                    <Color x:Key="Purple">#9B59B6</Color>
                     <Color x:Key="White">#FFEEEE</Color>
-                    
-                    <SolidColorBrush x:Key="Alert Background Color" Color="{StaticResource Blue}" />
+                    <Color x:Key="Red">#D64541</Color>
+
+                    <SolidColorBrush x:Key="Create Alert Background Color" Color="{StaticResource Blue}" />
+                    <SolidColorBrush x:Key="Rename Alert Background Color" Color="{StaticResource Purple}" />
+                    <SolidColorBrush x:Key="Delete Alert Background Color" Color="{StaticResource Red}" />
                     <SolidColorBrush x:Key="Top Bar Color" Color="{StaticResource Dark Blue}" />
                     <SolidColorBrush x:Key="Sidebar Color" Color="{StaticResource Dark Blue}" />
                     <SolidColorBrush x:Key="Button Color" Color="{StaticResource Blue}" />
                     <SolidColorBrush x:Key="Body Light" Color="{StaticResource White}" />
+                    <SolidColorBrush x:Key="Delete Menu Item Background" Color="{StaticResource Red}" />
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

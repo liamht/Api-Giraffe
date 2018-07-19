@@ -24,7 +24,7 @@
     </shell:WindowChrome.WindowChrome>
 
 
-    <materialDesign:DialogHost IsOpen="{Binding IsDialogShowing}" Margin="0" CloseOnClickAway="True">
+    <materialDesign:DialogHost IsOpen="{Binding IsDialogShowing}" Margin="0" CloseOnClickAway="True" DialogMargin="0 0 0 150">
         <materialDesign:DialogHost.DialogContent>
             <ContentControl Grid.Column="1" 
                             Margin="0"
@@ -103,26 +103,47 @@
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                            <StackPanel.ContextMenu>
+                                                <ContextMenu Margin="0" Background="{StaticResource MaterialDesignCardBackground}" Foreground="{StaticResource MaterialDesignBody}">
+                                                    <MenuItem Margin="0"
+                                                              Header="New Request"
+                                                              Command="{Binding AddNewItemCommand}"/>
+
+                                                    <MenuItem Margin="0"
+                                                              Header="Rename Group"
+                                                              Command="{Binding RenameGroupCommand}"/>
+
+                                                    <MenuItem Margin="0"
+                                                              Header="Delete Group"
+                                                              Background="{StaticResource 'Delete Menu Item Background'}"
+                                                              Foreground="{StaticResource 'Body Light'}"
+                                                              Command="{Binding DeleteGroupCommand}"/>
+
+                                                </ContextMenu>
+                                            </StackPanel.ContextMenu>
                                             <TextBlock Foreground="{StaticResource Body Light}" Text="{Binding Name}" 
                                                        FontWeight="Bold" FontSize="16" HorizontalAlignment="Stretch">
-                                                <TextBlock.ContextMenu>
-                                                    <ContextMenu Margin="0" Background="{StaticResource Sidebar Color}" Foreground="{StaticResource Body Light}">
-                                                        <MenuItem Margin="0"
-                                                            Header="New Request"
-                                                            Command="{Binding AddNewItemCommand}"/>
 
-                                                        <MenuItem Margin="0"
-                                                                  Header="Delete Group"
-                                                                  Command="{Binding DeleteGroupCommand}"/>
-
-                                                    </ContextMenu>
-                                                </TextBlock.ContextMenu>
                                             </TextBlock>
                                             <ListBox Margin="15 0 0 0" HorizontalAlignment="Stretch" ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                                 <ListBox.ItemTemplate>
                                                     <DataTemplate>
                                                         <Grid HorizontalAlignment="Stretch">
-                                                            <TextBlock Foreground="{DynamicResource MaterialDesignDarkForeground}" Text="{Binding Text}"/>
+                                                            <Grid.ContextMenu>
+                                                                <ContextMenu Margin="0" Background="{StaticResource MaterialDesignCardBackground}" Foreground="{StaticResource MaterialDesignBody}">
+                                                                    <MenuItem Margin="0"
+                                                                              Header="Rename Request"
+                                                                              Command="{Binding RenameRequestCommand}"/>
+
+                                                                    <MenuItem Margin="0"
+                                                                              Header="Delete Request"
+                                                                              Background="{StaticResource 'Delete Menu Item Background'}"
+                                                                              Foreground="{StaticResource 'Body Light'}"
+                                                                              Command="{Binding DeleteRequestCommand}"/>
+                                                                </ContextMenu>
+                                                            </Grid.ContextMenu>
+                                                            <TextBlock Foreground="{DynamicResource MaterialDesignDarkForeground}" Text="{Binding Text}">
+                                                            </TextBlock>
                                                         </Grid>
                                                     </DataTemplate>
                                                 </ListBox.ItemTemplate>
@@ -133,11 +154,11 @@
                             </ListBox>
                         </StackPanel>
                     </Grid>
-                 
-                        <Grid Grid.Column ="1">
-                            <TextBlock Margin="15 5 0 0" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="{DynamicResource MaterialDesignBody}" FontSize="22" Text="{Binding Title}"></TextBlock>
-                        </Grid>
-                        <ContentControl Grid.Column="1"
+
+                    <Grid Grid.Column ="1">
+                        <TextBlock Margin="15 5 0 0" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="{DynamicResource MaterialDesignBody}" FontSize="22" Text="{Binding Title}"></TextBlock>
+                    </Grid>
+                    <ContentControl Grid.Column="1"
                                 Margin="15 50 15 15"
                                 x:Name="CurrentPage" 
                                 HorizontalAlignment="Stretch"
@@ -145,7 +166,7 @@
                                 HorizontalContentAlignment="Stretch" 
                                 VerticalContentAlignment="Stretch"
                                 Content="{Binding CurrentPage}">
-                        </ContentControl>
+                    </ContentControl>
                 </Grid>
             </DockPanel>
         </Grid>
