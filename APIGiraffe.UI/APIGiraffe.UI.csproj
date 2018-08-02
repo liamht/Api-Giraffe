@@ -180,6 +180,7 @@
     <Compile Include="ViewModels\Menus\Menu.cs" />
     <Compile Include="ViewModels\Menus\MenuGroup.cs" />
     <Compile Include="ViewModels\Menus\RequestMenuItem.cs" />
+    <Compile Include="ViewModels\RenameRequestViewModel.cs" />
     <Compile Include="ViewModels\RenameGroupViewModel.cs" />
     <Compile Include="ViewModels\NewHeaderViewModel.cs" />
     <Compile Include="ViewModels\NewRequestViewModel.cs" />
@@ -192,6 +193,9 @@
     </Compile>
     <Compile Include="Views\CreateGroupDialog.xaml.cs">
       <DependentUpon>CreateGroupDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RenameRequestDialog.xaml.cs">
+      <DependentUpon>RenameRequestDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\RenameRequestGroupDialog.xaml.cs">
       <DependentUpon>RenameRequestGroupDialog.xaml</DependentUpon>
@@ -227,6 +231,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\CreateGroupDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\RenameRequestDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

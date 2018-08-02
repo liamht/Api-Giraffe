@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="APIGiraffe.UI.Views.RenameRequestDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:APIGiraffe.UI.Views"
+             xmlns:shell="clr-namespace:System.Windows.Shell;assembly=PresentationFramework"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="250" VerticalAlignment="Stretch">
+    <materialDesign:DialogHost VerticalAlignment="Stretch">
+        <Grid Background="{StaticResource MaterialDesignBackground}" VerticalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="125px"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0" Background="{StaticResource Rename Alert Background Color}" >
+                <TextBlock VerticalAlignment="Center" FontSize="25" HorizontalAlignment="Center" TextAlignment="Center" Margin="15" Foreground="{StaticResource MaterialDesignBackground}">Rename Request</TextBlock>
+                <TextBlock MaxWidth="300" Foreground="{StaticResource MaterialDesignBackground}" Margin="15 0 15 30" TextWrapping="Wrap" TextAlignment="Center">Please enter the new name of your request and click rename to confirm your changes</TextBlock>
+            </StackPanel>
+
+            <StackPanel Grid.Row="1" VerticalAlignment="Stretch">
+                <TextBlock Foreground="{StaticResource MaterialDesignBodyLight}" Margin="15" >Request Name:</TextBlock>
+                <TextBox Foreground="{StaticResource MaterialDesignBody}" Text="{Binding ItemName}" Margin="15 0 0 0"></TextBox>
+                <Button BorderThickness="0"  Background="{StaticResource 'Rename Alert Background Color'}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="15" Width="150" Command="{Binding OnConfirmCommand}">Rename</Button>
+            </StackPanel>
+
+        </Grid>
+
+    </materialDesign:DialogHost>
+</UserControl>

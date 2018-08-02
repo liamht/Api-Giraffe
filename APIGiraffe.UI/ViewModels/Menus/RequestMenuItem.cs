@@ -1,4 +1,6 @@
-﻿using System;
+﻿using APIGiraffe.UI.ViewModels.Commands;
+using System;
+using System.Windows.Input;
 
 namespace APIGiraffe.UI.ViewModels.Menus
 {
@@ -10,11 +12,16 @@ namespace APIGiraffe.UI.ViewModels.Menus
 
         public Action OnSelected { get; }
 
-        public RequestMenuItem(string text, int itemId, Action onSelected)
+        public ICommand RenameRequestCommand { get; }
+        
+        public RequestMenuItem(string text, int itemId, Action onSelected, 
+            Action renameRequest)
         {
             Text = text;
             ItemId = itemId;
             OnSelected = onSelected;
+
+            RenameRequestCommand = new ActionCommand(renameRequest);
         }
     }
 }

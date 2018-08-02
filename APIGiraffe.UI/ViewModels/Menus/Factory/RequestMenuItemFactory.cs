@@ -15,9 +15,16 @@ namespace APIGiraffe.UI.ViewModels.Menus.Factory
             _navigationHelper = navigationHelper;
         }
 
-        public RequestMenuItem Create(string text, int id)
+        public RequestMenuItem Create(string name, int id)
         {
-            return new RequestMenuItem(text, id, GetCurrentPageAction(id));
+            return new RequestMenuItem(name, id, GetCurrentPageAction(id),
+                GetRenameRequestAction(id, name));
+        }
+
+        private Action GetRenameRequestAction(int id, string name)
+        {
+            return () =>
+                _navigationHelper.ShowModal<RenameRequestDialog, RenameRequestViewModel>(vm => vm.SetValues(id, name));
         }
 
         private Action GetCurrentPageAction(int id)
