@@ -76,7 +76,7 @@ namespace APIGiraffe.UI.ViewModels
 
         private readonly IRequestMenuItemFactory _menuItemFactory;
 
-        public ICommand NewRequestCommand { get; set; }
+        public ICommand NewGroupCommand { get; set; }
 
         #endregion
 
@@ -87,7 +87,7 @@ namespace APIGiraffe.UI.ViewModels
             _menuGroupFactory = menuGroupFactory;
             _menuItemFactory = menuItemFactory;
 
-            NewRequestCommand = new ActionCommand(navigation.ShowModal<NewRequestDialog, NewRequestViewModel>);
+            NewGroupCommand = new ActionCommand(navigation.ShowModal<CreateGroupDialog, NewGroupViewModel>);
         }
 
         public void ShowDialog(UserControl dialogContent)

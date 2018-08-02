@@ -98,7 +98,7 @@
                     </Grid.ColumnDefinitions>
                     <Grid Grid.Column="0" Background="{StaticResource Sidebar Color}">
                         <StackPanel>
-                            <Button Margin="15" BorderBrush="{StaticResource Button Color}" Background="{StaticResource Button Color}" Command="{Binding NewRequestCommand}">New Group</Button>
+                            <Button Margin="15" BorderBrush="{StaticResource Button Color}" Background="{StaticResource Button Color}" Command="{Binding NewGroupCommand}">New Group</Button>
                             <ListBox HorizontalAlignment="Stretch" ItemsSource="{Binding Menu.Groups}" SelectedItem="{Binding SelectedMenuGroup, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
