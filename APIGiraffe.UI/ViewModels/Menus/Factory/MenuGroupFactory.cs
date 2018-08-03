@@ -47,8 +47,7 @@ namespace APIGiraffe.UI.ViewModels.Menus.Factory
         {
             return () =>
             {
-                _deleteGroupCommand.Execute(requestGroupId);
-                _navigationHelper.RefreshMenu();
+                _navigationHelper.ShowModal<DeleteRequestGroupDialog, DeleteRequestGroupViewModel>(vm => vm.LoadValues(requestGroupId));
             };
         }
     }

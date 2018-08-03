@@ -172,6 +172,7 @@
     <Compile Include="ViewModels\Commands\ActionCommand.cs" />
     <Compile Include="ViewModels\BasePageViewModel.cs" />
     <Compile Include="ViewModels\CurrentRequestViewModel.cs" />
+    <Compile Include="ViewModels\DeleteRequestGroupViewModel.cs" />
     <Compile Include="ViewModels\DeleteRequestViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\Menus\Factory\IMenuGroupFactory.cs" />
@@ -189,6 +190,9 @@
     <Compile Include="ViewModels\NewItemViewModel.cs" />
     <Compile Include="ViewModels\NotifyableViewModel.cs" />
     <Compile Include="Views\BindingProxy.cs" />
+    <Compile Include="Views\DeleteRequestGroupDialog.xaml.cs">
+      <DependentUpon>DeleteRequestGroupDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\NewHeaderDialog.xaml.cs">
       <DependentUpon>NewHeaderDialog.xaml</DependentUpon>
     </Compile>
@@ -207,6 +211,10 @@
     <Compile Include="Views\NewRequestDialog.xaml.cs">
       <DependentUpon>NewRequestDialog.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\DeleteRequestGroupDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\NewHeaderDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
