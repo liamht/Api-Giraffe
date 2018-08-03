@@ -19,6 +19,7 @@ namespace APIGiraffe.UI.ViewModels
             {
                 command.Execute(Id);
                 navigationHelper.RefreshMenu();
+                navigationHelper.DestroyModal();
             });
         }
 
