@@ -7,7 +7,7 @@ namespace APIGiraffe.UI.Views
     /// </summary>
     public partial class DeleteRequestDialog : UserControl
     {
-        public RenameRequestDialog()
+        public DeleteRequestDialog()
         {
             InitializeComponent();
         }
