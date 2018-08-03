@@ -22,12 +22,10 @@ using APIGiraffe.ApplicationServices.Requests.Commands.DeleteHeader;
 using APIGiraffe.ApplicationServices.Requests.Commands.RenameRequestGroup;
 using APIGiraffe.UI.ViewModels.Menus.Factory;
 using APIGiraffe.ApplicationServices.Requests.Commands.RenameRequest;
+using APIGiraffe.ApplicationServices.Requests.Commands.DeleteRequest;
 
 namespace APIGiraffe.UI
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
     public partial class App : Application
     {
         private INavigationHelper _navigation;
@@ -79,6 +77,7 @@ namespace APIGiraffe.UI
             _container.Bind<IRenameRequestGroupCommand>().To<RenameRequestGroupCommand>();
             _container.Bind<IUpdateRequestCommand>().To<UpdateRequestCommand>();
             _container.Bind<IDeleteHeaderCommand>().To<DeleteHeaderCommand>();
+            _container.Bind<IDeleteRequestCommand>().To<DeleteRequestCommand>();
             _container.Bind<IRenameRequestCommand>().To<RenameRequestCommand>();
             
             _container.Bind<IGetRequestDetailsQuery>().To<GetRequestDetailsQuery>();
