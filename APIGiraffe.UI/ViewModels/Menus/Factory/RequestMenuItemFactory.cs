@@ -18,7 +18,13 @@ namespace APIGiraffe.UI.ViewModels.Menus.Factory
         public RequestMenuItem Create(string name, int id)
         {
             return new RequestMenuItem(name, id, GetCurrentPageAction(id),
-                GetRenameRequestAction(id, name));
+                GetRenameRequestAction(id, name), GetDeleteRequestAction(id));
+        }
+
+        private Action GetDeleteRequestAction(int id)
+        {
+            return () =>
+                _navigationHelper.ShowModal<DeleteRequestDialog, DeleteRequestViewModel>(vm => vm.LoadValues(id));
         }
 
         private Action GetRenameRequestAction(int id, string name)

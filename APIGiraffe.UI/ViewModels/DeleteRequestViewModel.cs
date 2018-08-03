@@ -4,11 +4,13 @@ using System.Windows.Input;
 
 namespace APIGiraffe.UI.ViewModels
 {
-    public class DeleteRequestViewModel
+    public class DeleteRequestViewModel : BasePageViewModel
     {
+        public override string Title => "Delete Request";
+
         public ICommand ConfirmDeleteCommand { get; private set; }
 
-        public int Id { get; private set; }
+        public int Id { get; private set; }              
 
         public DeleteRequestViewModel(IDeleteRequestCommand command)
         {
