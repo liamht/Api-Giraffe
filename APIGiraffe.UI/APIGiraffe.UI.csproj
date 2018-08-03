@@ -172,6 +172,7 @@
     <Compile Include="ViewModels\Commands\ActionCommand.cs" />
     <Compile Include="ViewModels\BasePageViewModel.cs" />
     <Compile Include="ViewModels\CurrentRequestViewModel.cs" />
+    <Compile Include="ViewModels\DeleteRequestViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\Menus\Factory\IMenuGroupFactory.cs" />
     <Compile Include="ViewModels\Menus\Factory\IRequestMenuItemFactory.cs" />
