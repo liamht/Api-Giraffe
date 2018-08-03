@@ -25,7 +25,7 @@
                 <TextBlock  MaxWidth="300" Margin="15, 0, 15, 15" Foreground="{StaticResource MaterialDesignBodyLight}" TextWrapping="Wrap" > Once deleted, your request cannot be recovered unless recreated from scatch.
                 </TextBlock>
 
-                <Button BorderThickness="0"  Background="{StaticResource 'Delete Alert Background Color'}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="15" Width="150" Command="{Binding OnConfirmCommand}">Delete</Button>
+                <Button BorderThickness="0"  Background="{StaticResource 'Delete Alert Background Color'}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="15" Width="150" Command="{Binding ConfirmDeleteCommand}">Delete</Button>
             </StackPanel>
 
         </Grid>
