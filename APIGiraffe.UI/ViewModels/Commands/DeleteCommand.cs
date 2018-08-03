@@ -3,12 +3,12 @@ using System.Windows.Input;
 
 namespace APIGiraffe.UI.ViewModels.Commands
 {
-    public class DeleteCommand : ICommand
+    public class ActionCommandWithId : ICommand
     {
         public event EventHandler CanExecuteChanged;
         private readonly Action<int> _toExecute;
 
-        public DeleteCommand(Action<int> toExecute)
+        public ActionCommandWithId(Action<int> toExecute)
         {
             _toExecute = toExecute;
         }

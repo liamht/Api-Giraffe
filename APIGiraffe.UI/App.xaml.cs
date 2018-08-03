@@ -23,6 +23,7 @@ using APIGiraffe.ApplicationServices.Requests.Commands.RenameRequestGroup;
 using APIGiraffe.UI.ViewModels.Menus.Factory;
 using APIGiraffe.ApplicationServices.Requests.Commands.RenameRequest;
 using APIGiraffe.ApplicationServices.Requests.Commands.DeleteRequest;
+using APIGiraffe.ApplicationServices.Requests.Commands.UpdateHeader;
 
 namespace APIGiraffe.UI
 {
@@ -70,15 +71,18 @@ namespace APIGiraffe.UI
             _container.Bind<IRequestFactory>().To<RequestFactory>();
             _container.Bind<IRequestGroupFactory>().To<RequestGroupFactory>();
 
-            _container.Bind<IAddNewHeaderCommand>().To<AddNewHeaderCommand>();
-            _container.Bind<IAddNewRequestCommand>().To<AddNewRequestCommand>();
             _container.Bind<IAddNewRequestGroupCommand>().To<AddNewRequestGroupCommand>();
             _container.Bind<IDeleteRequestGroupCommand>().To<DeleteRequestGroupCommand>();
             _container.Bind<IRenameRequestGroupCommand>().To<RenameRequestGroupCommand>();
+
+            _container.Bind<IAddNewRequestCommand>().To<AddNewRequestCommand>();
             _container.Bind<IUpdateRequestCommand>().To<UpdateRequestCommand>();
-            _container.Bind<IDeleteHeaderCommand>().To<DeleteHeaderCommand>();
             _container.Bind<IDeleteRequestCommand>().To<DeleteRequestCommand>();
             _container.Bind<IRenameRequestCommand>().To<RenameRequestCommand>();
+
+            _container.Bind<IAddNewHeaderCommand>().To<AddNewHeaderCommand>();
+            _container.Bind<IDeleteHeaderCommand>().To<DeleteHeaderCommand>();
+            _container.Bind<IUpdateHeaderCommand>().To<UpdateHeaderCommand>();
             
             _container.Bind<IGetRequestDetailsQuery>().To<GetRequestDetailsQuery>();
             _container.Bind<IGetRequestGroupsQuery>().To<GetRequestGroupsQuery>();

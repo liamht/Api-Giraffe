@@ -114,13 +114,21 @@ namespace APIGiraffe.UI.ViewModels
                 HideLoadingSpinner();
             });
             AddHeaderCommand = new ActionCommand(ShowAddHeaderModal);
-            DeleteHeaderCommand = new DeleteCommand(DeleteHeader);
-            
+            DeleteHeaderCommand = new ActionCommandWithId(DeleteHeader);
+            EditHeaderCommand = new ActionCommandWithId(EditHeader);
+
             _addHeaderCommand = addHeaderCommand;
             _updateRequestCommand = updateRequestCommand;
             _deleteHeaderCommand = deleteHeaderCommand;
             _getDetailsQuery = getDetailsQuery;
             _navigationHelper = nav;
+        }
+
+        private void EditHeader(int headerId)
+        {
+            var header = RequestHeaders.Single(c => c.Id == headerId);
+
+            _navigationHelper.ShowModal<EditHeaderDialog, EditHeaderViewModel>(vm => vm.SetExistingValues(header.Id, header.Name, header.Value));
         }
 
         private void DeleteHeader(int headerId)
