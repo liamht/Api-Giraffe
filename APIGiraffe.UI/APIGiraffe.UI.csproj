@@ -195,6 +195,9 @@
     <Compile Include="Views\CreateGroupDialog.xaml.cs">
       <DependentUpon>CreateGroupDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\DeleteRequestDialog.xaml.cs">
+      <DependentUpon>DeleteRequestDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\RenameRequestDialog.xaml.cs">
       <DependentUpon>RenameRequestDialog.xaml</DependentUpon>
     </Compile>
@@ -232,6 +235,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\CreateGroupDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\DeleteRequestDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
