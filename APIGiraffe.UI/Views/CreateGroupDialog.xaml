@@ -22,8 +22,11 @@
 
             <StackPanel Grid.Row="1" VerticalAlignment="Stretch">
                 <TextBlock Foreground="{StaticResource MaterialDesignBodyLight}" Margin="15" >Group Name:</TextBlock>
-                <TextBox Foreground="{StaticResource MaterialDesignBodyLight}" Text="{Binding ItemName}" Margin="15 0 0 0"></TextBox>
-                <Button  Background="{StaticResource Button Color}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="15" Width="150" Command="{Binding OnConfirmCommand}">Create Group</Button>
+
+                <TextBox Text="{Binding ItemName}" Margin="15 0 0 0"></TextBox>
+                <TextBlock Foreground="{StaticResource ValidationErrorBrush}" Margin="15 5" Text="{Binding ItemNameErrorMessage}"></TextBlock>
+
+                <Button Background="{StaticResource Button Color}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="15" Width="150" Command="{Binding OnConfirmCommand}">Create Group</Button>
             </StackPanel>
 
         </Grid>

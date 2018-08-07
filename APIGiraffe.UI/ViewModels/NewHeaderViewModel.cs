@@ -27,6 +27,17 @@ namespace APIGiraffe.UI.ViewModels
             }
         }
 
+        private string _itemValueErrorMessage;
+        public string ItemValueErrorMessage
+        {
+            get => _itemValueErrorMessage;
+            set
+            {
+                _itemValueErrorMessage = value;
+                NotifyPropertyChanged(nameof(ItemValueErrorMessage));
+            }
+        }
+
         public NewHeaderViewModel(INavigationHelper navigation, IAddNewHeaderCommand command)
         : base()
         {
@@ -34,20 +45,38 @@ namespace APIGiraffe.UI.ViewModels
             _navigation = navigation;
         }
 
-
         public void ForRequest(int requestId)
         {
             _requestId = requestId;
         }
 
-        public override void OnSuccess()
+        public override void OnValidationComplete()
         {
             _command.Execute(_requestId, ItemName, ItemValue);
 
             _navigation.DestroyModal();
             _navigation.RefreshMenu();
 
-            OnSuccessCallback.Invoke(this, new EventArgs());
+            OnSuccessCallback?.Invoke(this, new EventArgs());
+        }
+
+        public override void Validate()
+        {
+            ItemNameErrorMessage = string.Empty;
+            ItemValueErrorMessage = string.Empty;
+            IsValid = true;
+
+            if (string.IsNullOrWhiteSpace(ItemName))
+            {
+                ItemNameErrorMessage = "Header name cannot be empty";
+                IsValid = false;
+            }
+
+            if (string.IsNullOrWhiteSpace(ItemValue))
+            {
+                ItemValueErrorMessage = "Header value cannot be empty";
+                IsValid = false;
+            }
         }
     }
 }

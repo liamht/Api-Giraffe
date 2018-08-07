@@ -23,6 +23,8 @@
             <StackPanel Grid.Row="1" VerticalAlignment="Stretch">
                 <TextBlock Foreground="{StaticResource MaterialDesignBodyLight}" Margin="15" >Request Name:</TextBlock>
                 <TextBox Foreground="{StaticResource MaterialDesignBodyLight}" Text="{Binding ItemName}" Margin="15 0 0 0"></TextBox>
+                <TextBlock Foreground="{StaticResource ValidationErrorBrush}"  Margin="15 5" Text="{Binding ItemNameErrorMessage}"></TextBlock>
+
                 <Button  Background="{StaticResource Button Color}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="15" Width="150" Command="{Binding OnConfirmCommand}">Create Request</Button>
             </StackPanel>
 

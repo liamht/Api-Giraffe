@@ -1,12 +1,10 @@
 ﻿using APIGiraffe.ApplicationServices.Requests.Commands.UpdateHeader;
 using APIGiraffe.UI.Navigation;
-using APIGiraffe.UI.ViewModels.Commands;
 using System;
-using System.Windows.Input;
 
 namespace APIGiraffe.UI.ViewModels
 {
-    public class EditHeaderViewModel : ViewModelWithSuccessCallback
+    public class EditHeaderViewModel : NewItemViewModel
     {
         public event EventHandler OnDeleteSuccessful;
 
@@ -29,18 +27,16 @@ namespace APIGiraffe.UI.ViewModels
             }
         }
 
-        private string _itemName;
-        public string ItemName
+        private string _itemValueErrorMessage;
+        public string ItemValueErrorMessage
         {
-            get => _itemName;
+            get => _itemValueErrorMessage;
             set
             {
-                _itemName = value;
-                NotifyPropertyChanged(nameof(ItemName));
+                _itemValueErrorMessage = value;
+                NotifyPropertyChanged(nameof(ItemValueErrorMessage));
             }
         }
-
-
         public EditHeaderViewModel(INavigationHelper navigation, IUpdateHeaderCommand command)
         {
             _command = command;
@@ -54,11 +50,30 @@ namespace APIGiraffe.UI.ViewModels
             ItemValue = value;
         }
 
-        public override void OnSuccess()
+        public override void Validate()
+        {
+            ItemNameErrorMessage = string.Empty;
+            ItemValueErrorMessage = string.Empty;
+            IsValid = true;
+
+            if (string.IsNullOrWhiteSpace(ItemName))
+            {
+                ItemNameErrorMessage = "Header name cannot be empty";
+                IsValid = false;
+            }
+
+            if (string.IsNullOrWhiteSpace(ItemValue))
+            {
+                ItemValueErrorMessage = "Header value cannot be empty";
+                IsValid = false;
+            }
+        }
+
+        public override void OnValidationComplete()
         {
             _command.Execute(_headerId, ItemName, ItemValue);
             _navigation.DestroyModal();
-            OnDeleteSuccessful.Invoke(this, new EventArgs());
+            OnDeleteSuccessful?.Invoke(this, new EventArgs());
         }
     }
 }

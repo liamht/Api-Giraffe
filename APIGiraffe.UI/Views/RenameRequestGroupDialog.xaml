@@ -22,7 +22,9 @@
 
             <StackPanel Grid.Row="1" VerticalAlignment="Stretch">
                 <TextBlock Foreground="{StaticResource MaterialDesignBodyLight}" Margin="15" >Request Group Name:</TextBlock>
-                <TextBox Foreground="{StaticResource MaterialDesignBody}" Text="{Binding ItemName}" Margin="15 0 0 0"></TextBox>
+                <TextBox Foreground="{StaticResource MaterialDesignBody}" Text="{Binding ItemName}" Margin="15 0"></TextBox>
+                <TextBlock Foreground="{StaticResource ValidationErrorBrush}"  Margin="15 5" Text="{Binding ItemNameErrorMessage}"></TextBlock>
+
                 <Button BorderThickness="0"  Background="{StaticResource 'Rename Alert Background Color'}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="15" Width="150" Command="{Binding OnConfirmCommand}">Rename</Button>
             </StackPanel>
 

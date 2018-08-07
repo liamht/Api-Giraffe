@@ -26,7 +26,7 @@ namespace APIGiraffe.UI.ViewModels
             _groupId = groupId;
         }
 
-        public override void OnSuccess()
+        public override void OnValidationComplete()
         {
             if (_groupId == 0)
             {
@@ -36,6 +36,19 @@ namespace APIGiraffe.UI.ViewModels
             _command.Execute(_groupId, ItemName);
             _navigation.DestroyModal();
             _navigation.RefreshMenu();
+        }
+
+        public override void Validate()
+        {
+            ItemNameErrorMessage = string.Empty;
+            ItemNameErrorMessage = string.Empty;
+            IsValid = true;
+
+            if (string.IsNullOrWhiteSpace(ItemName))
+            {
+                ItemNameErrorMessage = "Request name cannot be empty";
+                IsValid = false;
+            }
         }
     }
 }

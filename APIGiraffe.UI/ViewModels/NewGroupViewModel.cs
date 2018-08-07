@@ -18,12 +18,24 @@ namespace APIGiraffe.UI.ViewModels
             _navigation = navigation;
         }
 
-        public override void OnSuccess()
+        public override void OnValidationComplete()
         {
             _command.Execute(ItemName);
 
             _navigation.DestroyModal();
             _navigation.RefreshMenu();
+        }
+
+        public override void Validate()
+        {
+            IsValid = true;
+            ItemNameErrorMessage = string.Empty;
+
+            if (string.IsNullOrWhiteSpace(ItemName))
+            {
+                ItemNameErrorMessage = "Group name cannot be empty";
+                IsValid = false;
+            }
         }
     }
 }
