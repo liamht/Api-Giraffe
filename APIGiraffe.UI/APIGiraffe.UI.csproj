@@ -190,6 +190,7 @@
     <Compile Include="ViewModels\NewGroupViewModel.cs" />
     <Compile Include="ViewModels\NewItemViewModel.cs" />
     <Compile Include="ViewModels\NotifyableViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelWithSuccessCallback.cs" />
     <Compile Include="Views\BindingProxy.cs" />
     <Compile Include="Views\DeleteRequestGroupDialog.xaml.cs">
       <DependentUpon>DeleteRequestGroupDialog.xaml</DependentUpon>

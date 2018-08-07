@@ -8,6 +8,8 @@ namespace APIGiraffe.UI.ViewModels
     {
         private readonly IAddNewHeaderCommand _command;
 
+        private readonly INavigationHelper _navigation;
+
         public event EventHandler OnSuccessCallback;
 
         private int _requestId;
@@ -26,9 +28,10 @@ namespace APIGiraffe.UI.ViewModels
         }
 
         public NewHeaderViewModel(INavigationHelper navigation, IAddNewHeaderCommand command)
-        : base(navigation)
+        : base()
         {
             _command = command;
+            _navigation = navigation;
         }
 
 
@@ -41,8 +44,8 @@ namespace APIGiraffe.UI.ViewModels
         {
             _command.Execute(_requestId, ItemName, ItemValue);
 
-            Navigation.DestroyModal();
-            Navigation.RefreshMenu();
+            _navigation.DestroyModal();
+            _navigation.RefreshMenu();
 
             OnSuccessCallback.Invoke(this, new EventArgs());
         }

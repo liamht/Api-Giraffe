@@ -10,12 +10,15 @@ namespace APIGiraffe.UI.ViewModels
 
         private readonly IAddNewRequestCommand _command;
 
+        private readonly INavigationHelper _navigation;
+
         private int _groupId;
 
         public NewRequestViewModel(INavigationHelper navigation, IAddNewRequestCommand command) 
-            : base(navigation)
+            : base()
         {
             _command = command;
+            _navigation = navigation;
         }
 
         public void SetGroupId(int groupId)
@@ -31,8 +34,8 @@ namespace APIGiraffe.UI.ViewModels
             }
 
             _command.Execute(_groupId, ItemName);
-            Navigation.DestroyModal();
-            Navigation.RefreshMenu();
+            _navigation.DestroyModal();
+            _navigation.RefreshMenu();
         }
     }
 }

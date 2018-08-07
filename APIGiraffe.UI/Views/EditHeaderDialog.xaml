@@ -26,7 +26,7 @@
                 
                 <TextBlock Foreground="{StaticResource MaterialDesignBodyLight}" Margin="15" >Value:</TextBlock>
                 <TextBox Foreground="{StaticResource MaterialDesignBodyLight}" Text="{Binding ItemValue}" Margin="15 0 0 0"></TextBox>
-                <Button  Background="{StaticResource Rename Alert Background Color}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="15" Width="150" Command="{Binding EditCommand}">Update Header</Button>
+                <Button  Background="{StaticResource Rename Alert Background Color}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="15" Width="150" Command="{Binding OnConfirmCommand}">Update Header</Button>
             </StackPanel>
 
         </Grid>

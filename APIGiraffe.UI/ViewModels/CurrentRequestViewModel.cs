@@ -128,12 +128,19 @@ namespace APIGiraffe.UI.ViewModels
         {
             var header = RequestHeaders.Single(c => c.Id == headerId);
 
-            _navigationHelper.ShowModal<EditHeaderDialog, EditHeaderViewModel>(vm => vm.SetExistingValues(header.Id, header.Name, header.Value));
+            _navigationHelper.ShowModal<EditHeaderDialog, EditHeaderViewModel>(vm => { vm.SetExistingValues(header.Id, header.Name, header.Value);
+                vm.OnDeleteSuccessful += HeaderDeleteCallback;
+            });
         }
 
         private void DeleteHeader(int headerId)
         {
             _deleteHeaderCommand.Execute(headerId);
+            RefreshHeaders();
+        }
+
+        private void HeaderDeleteCallback(object sender, EventArgs e)
+        {
             RefreshHeaders();
         }
 

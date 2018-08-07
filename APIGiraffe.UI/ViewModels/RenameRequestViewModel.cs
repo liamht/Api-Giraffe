@@ -10,12 +10,15 @@ namespace APIGiraffe.UI.ViewModels
 
         private readonly IRenameRequestCommand _command;
 
+        private readonly INavigationHelper _navigation;
+
         private int _groupId;
 
         public RenameRequestViewModel(INavigationHelper navigation, IRenameRequestCommand command) 
-            : base(navigation)
+            : base()
         {
             _command = command;
+            _navigation = navigation;
         }
 
         public void SetValues(int id, string currentName)
@@ -28,8 +31,8 @@ namespace APIGiraffe.UI.ViewModels
         {
             _command.Execute(_groupId, ItemName);
 
-            Navigation.DestroyModal();
-            Navigation.RefreshMenu();
+            _navigation.DestroyModal();
+            _navigation.RefreshMenu();
         }
     }
 }

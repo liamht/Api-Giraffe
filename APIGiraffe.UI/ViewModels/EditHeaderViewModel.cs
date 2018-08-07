@@ -1,13 +1,18 @@
 ﻿using APIGiraffe.ApplicationServices.Requests.Commands.UpdateHeader;
 using APIGiraffe.UI.Navigation;
 using APIGiraffe.UI.ViewModels.Commands;
+using System;
 using System.Windows.Input;
 
 namespace APIGiraffe.UI.ViewModels
 {
-    public class EditHeaderViewModel : BasePageViewModel
+    public class EditHeaderViewModel : ViewModelWithSuccessCallback
     {
+        public event EventHandler OnDeleteSuccessful;
+
         private readonly IUpdateHeaderCommand _command;
+
+        private readonly INavigationHelper _navigation;               
 
         public override string Title => "Edit Header";
         
@@ -35,16 +40,11 @@ namespace APIGiraffe.UI.ViewModels
             }
         }
 
-        public ICommand EditCommand { get; private set; }
 
         public EditHeaderViewModel(INavigationHelper navigation, IUpdateHeaderCommand command)
         {
             _command = command;
-            EditCommand = new ActionCommand(() =>
-            {
-                command.Execute(_headerId, ItemName, ItemValue);
-                navigation.DestroyModal();
-            });
+            _navigation = navigation;
         }
         
         public void SetExistingValues(int headerId, string name, string value)
@@ -52,6 +52,13 @@ namespace APIGiraffe.UI.ViewModels
             _headerId = headerId;
             ItemName = name;
             ItemValue = value;
+        }
+
+        public override void OnSuccess()
+        {
+            _command.Execute(_headerId, ItemName, ItemValue);
+            _navigation.DestroyModal();
+            OnDeleteSuccessful.Invoke(this, new EventArgs());
         }
     }
 }

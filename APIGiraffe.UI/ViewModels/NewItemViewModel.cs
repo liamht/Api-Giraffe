@@ -1,15 +1,9 @@
-﻿using System.Windows.Input;
-using APIGiraffe.UI.Navigation;
-using APIGiraffe.UI.ViewModels.Commands;
+﻿using APIGiraffe.UI.Navigation;
 
 namespace APIGiraffe.UI.ViewModels
 {
-    public abstract class NewItemViewModel : BasePageViewModel
+    public abstract class NewItemViewModel : ViewModelWithSuccessCallback
     {
-        protected readonly INavigationHelper Navigation;
-
-        public ICommand OnConfirmCommand => new ActionCommand(OnSuccess);
-
         private string _itemName;
         public string ItemName
         {
@@ -21,11 +15,8 @@ namespace APIGiraffe.UI.ViewModels
             }
         }
 
-        protected NewItemViewModel(INavigationHelper navigation)
+        protected NewItemViewModel()
         {
-            Navigation = navigation;
         }
-
-        public abstract void OnSuccess();
     }
 }

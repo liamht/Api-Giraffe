@@ -9,18 +9,21 @@ namespace APIGiraffe.UI.ViewModels
 
         private readonly IAddNewRequestGroupCommand _command;
 
+        private readonly INavigationHelper _navigation;
+
         public NewGroupViewModel(INavigationHelper navigation, IAddNewRequestGroupCommand command) 
-            : base(navigation)
+            : base()
         {
             _command = command;
+            _navigation = navigation;
         }
 
         public override void OnSuccess()
         {
             _command.Execute(ItemName);
 
-            Navigation.DestroyModal();
-            Navigation.RefreshMenu();
+            _navigation.DestroyModal();
+            _navigation.RefreshMenu();
         }
     }
 }
