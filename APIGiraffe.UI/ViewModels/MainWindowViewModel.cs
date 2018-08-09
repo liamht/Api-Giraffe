@@ -9,6 +9,7 @@ using Menu = APIGiraffe.UI.ViewModels.Menus.Menu;
 using APIGiraffe.ApplicationServices.Requests.Queries.GetRequestGroups;
 using APIGiraffe.UI.ViewModels.Commands;
 using APIGiraffe.UI.ViewModels.Menus.Factory;
+using APIGiraffe.UI.ViewModels.RequestGroups;
 
 namespace APIGiraffe.UI.ViewModels
 {

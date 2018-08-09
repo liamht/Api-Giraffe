@@ -1,11 +1,11 @@
-﻿using APIGiraffe.ApplicationServices.Requests.Commands.DeleteRequest;
+﻿using APIGiraffe.ApplicationServices.Requests.Commands.DeleteRequestGroup;
 using APIGiraffe.UI.Navigation;
 using APIGiraffe.UI.ViewModels.Commands;
 using System.Windows.Input;
 
-namespace APIGiraffe.UI.ViewModels
+namespace APIGiraffe.UI.ViewModels.RequestGroups
 {
-    public class DeleteRequestViewModel : BasePageViewModel
+    public class DeleteRequestGroupViewModel : BasePageViewModel
     {
         public override string Title => "Delete Request";
 
@@ -13,7 +13,7 @@ namespace APIGiraffe.UI.ViewModels
 
         public int Id { get; private set; }
 
-        public DeleteRequestViewModel(IDeleteRequestCommand command, INavigationHelper navigationHelper)
+        public DeleteRequestGroupViewModel(IDeleteRequestGroupCommand command, INavigationHelper navigationHelper)
         {
             ConfirmDeleteCommand = new ActionCommand(() =>
             {

@@ -1,7 +1,6 @@
 ﻿using System;
 using APIGiraffe.UI.Navigation;
-using APIGiraffe.UI.ViewModels;
-using APIGiraffe.UI.ViewModels.Menus;
+using APIGiraffe.UI.ViewModels.Requests;
 using APIGiraffe.UI.Views;
 
 namespace APIGiraffe.UI.ViewModels.Menus.Factory

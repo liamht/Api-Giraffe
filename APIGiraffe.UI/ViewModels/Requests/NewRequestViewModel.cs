@@ -1,37 +1,39 @@
 ﻿using System;
-using APIGiraffe.ApplicationServices.Requests.Commands.RenameRequest;
-using APIGiraffe.ApplicationServices.Requests.Commands.RenameRequestGroup;
+using APIGiraffe.ApplicationServices.Requests.Commands.AddNewRequest;
 using APIGiraffe.UI.Navigation;
 
-namespace APIGiraffe.UI.ViewModels
+namespace APIGiraffe.UI.ViewModels.Requests
 {
-    public class RenameRequestViewModel : NewItemViewModel
+    public class NewRequestViewModel : NewItemViewModel
     {
-        public override string Title => "Rename Group";
+        public override string Title => "Create New Request";
 
-        private readonly IRenameRequestCommand _command;
+        private readonly IAddNewRequestCommand _command;
 
         private readonly INavigationHelper _navigation;
 
         private int _groupId;
 
-        public RenameRequestViewModel(INavigationHelper navigation, IRenameRequestCommand command) 
+        public NewRequestViewModel(INavigationHelper navigation, IAddNewRequestCommand command) 
             : base()
         {
             _command = command;
             _navigation = navigation;
         }
 
-        public void SetValues(int id, string currentName)
+        public void SetGroupId(int groupId)
         {
-            _groupId = id;
-            ItemName = currentName;
+            _groupId = groupId;
         }
 
         public override void OnValidationComplete()
         {
-            _command.Execute(_groupId, ItemName);
+            if (_groupId == 0)
+            {
+                throw new ArgumentException("group for request not set");
+            }
 
+            _command.Execute(_groupId, ItemName);
             _navigation.DestroyModal();
             _navigation.RefreshMenu();
         }

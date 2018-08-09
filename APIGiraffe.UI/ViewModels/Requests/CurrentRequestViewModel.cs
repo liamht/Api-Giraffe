@@ -12,8 +12,9 @@ using APIGiraffe.UI.Views;
 using APIGiraffe.UI.ViewModels.Commands;
 using Header = APIGiraffe.ApplicationServices.Requests.Queries.GetRequestDetails.Header;
 using System.Linq;
+using APIGiraffe.UI.ViewModels.Headers;
 
-namespace APIGiraffe.UI.ViewModels
+namespace APIGiraffe.UI.ViewModels.Requests
 {
     public class CurrentRequestViewModel : BasePageViewModel
     {

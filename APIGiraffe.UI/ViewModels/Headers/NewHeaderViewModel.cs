@@ -2,7 +2,7 @@
 using APIGiraffe.UI.Navigation;
 using System;
 
-namespace APIGiraffe.UI.ViewModels
+namespace APIGiraffe.UI.ViewModels.Headers
 {
     public class NewHeaderViewModel : NewItemViewModel
     {

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using APIGiraffe.ApplicationServices.Requests.Commands.DeleteRequestGroup;
 using APIGiraffe.UI.Navigation;
+using APIGiraffe.UI.ViewModels.RequestGroups;
+using APIGiraffe.UI.ViewModels.Requests;
 using APIGiraffe.UI.Views;
 
 namespace APIGiraffe.UI.ViewModels.Menus.Factory

@@ -1,7 +1,7 @@
 ﻿using APIGiraffe.ApplicationServices.Requests.Commands.AddNewRequestGroup;
 using APIGiraffe.UI.Navigation;
 
-namespace APIGiraffe.UI.ViewModels
+namespace APIGiraffe.UI.ViewModels.RequestGroups
 {
     public class NewGroupViewModel : NewItemViewModel
     {

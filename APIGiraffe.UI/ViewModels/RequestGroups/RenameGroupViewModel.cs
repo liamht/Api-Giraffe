@@ -2,7 +2,7 @@
 using APIGiraffe.ApplicationServices.Requests.Commands.RenameRequestGroup;
 using APIGiraffe.UI.Navigation;
 
-namespace APIGiraffe.UI.ViewModels
+namespace APIGiraffe.UI.ViewModels.RequestGroups
 {
     public class RenameGroupViewModel : NewItemViewModel
     {
