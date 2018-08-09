@@ -1,7 +1,7 @@
 ﻿using APIGiraffe.Data.UnitOfWork;
 using System;
 
-namespace APIGiraffe.ApplicationServices.Requests.Commands.UpdateHeader
+namespace APIGiraffe.ApplicationServices.Headers.Commands.UpdateHeader
 {
     public class UpdateHeaderCommand : IUpdateHeaderCommand
     {

@@ -1,4 +1,4 @@
-﻿using APIGiraffe.ApplicationServices.Requests.Commands.AddNewHeader;
+﻿using APIGiraffe.ApplicationServices.Headers.Commands.AddNewHeader;
 using APIGiraffe.UI.Navigation;
 using System;
 

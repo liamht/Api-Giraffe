@@ -1,7 +1,7 @@
 ﻿using System;
 using APIGiraffe.Data.UnitOfWork;
 
-namespace APIGiraffe.ApplicationServices.Requests.Commands.RenameRequestGroup
+namespace APIGiraffe.ApplicationServices.RequestGroups.Commands.RenameRequestGroup
 {
     public class RenameRequestGroupCommand : IRenameRequestGroupCommand
     {

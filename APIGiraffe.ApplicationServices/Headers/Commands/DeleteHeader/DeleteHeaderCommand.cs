@@ -1,7 +1,7 @@
 ﻿using System;
 using APIGiraffe.Data.UnitOfWork;
 
-namespace APIGiraffe.ApplicationServices.Requests.Commands.DeleteHeader
+namespace APIGiraffe.ApplicationServices.Headers.Commands.DeleteHeader
 {
     public class DeleteHeaderCommand : IDeleteHeaderCommand
     {

@@ -1,11 +1,11 @@
 ﻿using System;
-using APIGiraffe.ApplicationServices.Requests.Commands.AddNewHeader.Factory;
+using APIGiraffe.ApplicationServices.Headers.Commands.AddNewHeader.Factory;
 using APIGiraffe.Data.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using Remotion.Linq.Parsing;
 
-namespace APIGiraffe.ApplicationServices.Requests.Commands.AddNewHeader
+namespace APIGiraffe.ApplicationServices.Headers.Commands.AddNewHeader
 {
     public class AddNewHeaderCommand : IAddNewHeaderCommand
     {

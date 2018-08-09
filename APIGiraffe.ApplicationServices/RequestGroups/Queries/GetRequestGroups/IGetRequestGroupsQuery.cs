@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace APIGiraffe.ApplicationServices.Requests.Queries.GetRequestGroups
+namespace APIGiraffe.ApplicationServices.RequestGroups.Queries.GetRequestGroups
 {
     public interface IGetRequestGroupsQuery
     {

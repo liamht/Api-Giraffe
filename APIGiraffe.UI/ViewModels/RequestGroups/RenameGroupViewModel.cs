@@ -1,5 +1,5 @@
 ﻿using System;
-using APIGiraffe.ApplicationServices.Requests.Commands.RenameRequestGroup;
+using APIGiraffe.ApplicationServices.RequestGroups.Commands.RenameRequestGroup;
 using APIGiraffe.UI.Navigation;
 
 namespace APIGiraffe.UI.ViewModels.RequestGroups

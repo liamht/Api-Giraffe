@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using APIGiraffe.ApplicationServices.Requests.Commands.DeleteRequestGroup;
+using APIGiraffe.ApplicationServices.RequestGroups.Commands.DeleteRequestGroup;
 using APIGiraffe.Data.Entities;
 using APIGiraffe.Data.UnitOfWork;
 using Microsoft.EntityFrameworkCore;

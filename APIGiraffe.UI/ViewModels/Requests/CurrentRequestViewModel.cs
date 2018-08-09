@@ -2,8 +2,8 @@
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using APIGiraffe.ApplicationServices.Requests.Commands.AddNewHeader;
-using APIGiraffe.ApplicationServices.Requests.Commands.DeleteHeader;
+using APIGiraffe.ApplicationServices.Headers.Commands.AddNewHeader;
+using APIGiraffe.ApplicationServices.Headers.Commands.DeleteHeader;
 using APIGiraffe.ApplicationServices.Requests.Commands.UpdateRequest;
 using APIGiraffe.ApplicationServices.Requests.Queries.GetRequestDetails;
 using APIGiraffe.Domain;

@@ -1,4 +1,4 @@
-﻿using APIGiraffe.ApplicationServices.Requests.Commands.AddNewHeader.Factory;
+﻿using APIGiraffe.ApplicationServices.Headers.Commands.AddNewHeader.Factory;
 using APIGiraffe.Domain;
 using Xunit;
 

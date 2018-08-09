@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using APIGiraffe.ApplicationServices.Requests.Commands.RenameRequestGroup;
+using APIGiraffe.ApplicationServices.RequestGroups.Commands.RenameRequestGroup;
 using APIGiraffe.Data.Entities;
 using APIGiraffe.Data.UnitOfWork;
 using Microsoft.EntityFrameworkCore;

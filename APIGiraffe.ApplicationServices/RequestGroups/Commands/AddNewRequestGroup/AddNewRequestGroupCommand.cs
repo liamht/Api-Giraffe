@@ -1,8 +1,8 @@
 ﻿using System;
-using APIGiraffe.ApplicationServices.Requests.Commands.AddNewRequestGroup.Factory;
+using APIGiraffe.ApplicationServices.RequestGroups.Commands.AddNewRequestGroup.Factory;
 using APIGiraffe.Data.UnitOfWork;
 
-namespace APIGiraffe.ApplicationServices.Requests.Commands.AddNewRequestGroup
+namespace APIGiraffe.ApplicationServices.RequestGroups.Commands.AddNewRequestGroup
 {
     public class AddNewRequestGroupCommand : IAddNewRequestGroupCommand
     {

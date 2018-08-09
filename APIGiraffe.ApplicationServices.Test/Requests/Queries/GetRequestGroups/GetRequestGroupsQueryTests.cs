@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using APIGiraffe.ApplicationServices.Requests.Queries.GetRequestGroups;
+using APIGiraffe.ApplicationServices.RequestGroups.Queries.GetRequestGroups;
 using APIGiraffe.Data.Entities;
 using APIGiraffe.Data.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 using Moq;
 using Xunit;
-using RequestGroup = APIGiraffe.ApplicationServices.Requests.Queries.GetRequestGroups.RequestGroup;
+using RequestGroup = APIGiraffe.ApplicationServices.RequestGroups.Queries.GetRequestGroups.RequestGroup;
 
 namespace APIGiraffe.ApplicationServices.Test.Requests.Queries.GetRequestGroups
 {

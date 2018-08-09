@@ -6,7 +6,7 @@ using APIGiraffe.UI.ViewModels.Menus;
 using APIGiraffe.UI.Navigation;
 using APIGiraffe.UI.Views;
 using Menu = APIGiraffe.UI.ViewModels.Menus.Menu;
-using APIGiraffe.ApplicationServices.Requests.Queries.GetRequestGroups;
+using APIGiraffe.ApplicationServices.RequestGroups.Queries.GetRequestGroups;
 using APIGiraffe.UI.ViewModels.Commands;
 using APIGiraffe.UI.ViewModels.Menus.Factory;
 using APIGiraffe.UI.ViewModels.RequestGroups;

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace APIGiraffe.ApplicationServices.Requests.Queries.GetRequestGroups
+namespace APIGiraffe.ApplicationServices.RequestGroups.Queries.GetRequestGroups
 {
     public class RequestGroup
     {

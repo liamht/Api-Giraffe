@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using APIGiraffe.ApplicationServices.Requests.Commands.AddNewRequestGroup;
-using APIGiraffe.ApplicationServices.Requests.Commands.AddNewRequestGroup.Factory;
+using APIGiraffe.ApplicationServices.RequestGroups.Commands.AddNewRequestGroup;
+using APIGiraffe.ApplicationServices.RequestGroups.Commands.AddNewRequestGroup.Factory;
 using APIGiraffe.Data.Entities;
 using APIGiraffe.Data.UnitOfWork;
 using Microsoft.EntityFrameworkCore;

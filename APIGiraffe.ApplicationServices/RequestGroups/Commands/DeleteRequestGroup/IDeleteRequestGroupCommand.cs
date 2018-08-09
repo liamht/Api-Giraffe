@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace APIGiraffe.ApplicationServices.Requests.Commands.DeleteRequestGroup
+namespace APIGiraffe.ApplicationServices.RequestGroups.Commands.DeleteRequestGroup
 {
     public interface IDeleteRequestGroupCommand
     {

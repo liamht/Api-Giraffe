@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using APIGiraffe.ApplicationServices.Requests.Commands.DeleteHeader;
+using APIGiraffe.ApplicationServices.Headers.Commands.DeleteHeader;
 using APIGiraffe.Data.Entities;
 using APIGiraffe.Data.UnitOfWork;
 using Microsoft.EntityFrameworkCore;

@@ -8,22 +8,22 @@ using APIGiraffe.Data.Repository;
 using APIGiraffe.Data.UnitOfWork;
 using APIGiraffe.UI.Navigation;
 using APIGiraffe.UI.Views;
-using APIGiraffe.ApplicationServices.Requests.Commands.AddNewHeader;
-using APIGiraffe.ApplicationServices.Requests.Commands.AddNewRequest;
-using APIGiraffe.ApplicationServices.Requests.Commands.AddNewRequestGroup;
-using APIGiraffe.ApplicationServices.Requests.Commands.DeleteRequestGroup;
-using APIGiraffe.ApplicationServices.Requests.Commands.UpdateRequest;
-using APIGiraffe.ApplicationServices.Requests.Queries.GetRequestGroups;
-using APIGiraffe.ApplicationServices.Requests.Queries.GetRequestDetails;
-using APIGiraffe.ApplicationServices.Requests.Commands.AddNewHeader.Factory;
-using APIGiraffe.ApplicationServices.Requests.Commands.AddNewRequest.Factory;
-using APIGiraffe.ApplicationServices.Requests.Commands.AddNewRequestGroup.Factory;
-using APIGiraffe.ApplicationServices.Requests.Commands.DeleteHeader;
-using APIGiraffe.ApplicationServices.Requests.Commands.RenameRequestGroup;
 using APIGiraffe.UI.ViewModels.Menus.Factory;
+using APIGiraffe.ApplicationServices.Headers.Commands.AddNewHeader;
+using APIGiraffe.ApplicationServices.Headers.Commands.DeleteHeader;
+using APIGiraffe.ApplicationServices.Headers.Commands.UpdateHeader;
+using APIGiraffe.ApplicationServices.Headers.Commands.AddNewHeader.Factory;
+using APIGiraffe.ApplicationServices.RequestGroups.Commands.AddNewRequestGroup;
+using APIGiraffe.ApplicationServices.RequestGroups.Commands.DeleteRequestGroup;
+using APIGiraffe.ApplicationServices.RequestGroups.Queries.GetRequestGroups;
+using APIGiraffe.ApplicationServices.RequestGroups.Commands.AddNewRequestGroup.Factory;
+using APIGiraffe.ApplicationServices.RequestGroups.Commands.RenameRequestGroup;
+using APIGiraffe.ApplicationServices.Requests.Commands.UpdateRequest;
+using APIGiraffe.ApplicationServices.Requests.Commands.AddNewRequest;
+using APIGiraffe.ApplicationServices.Requests.Queries.GetRequestDetails;
+using APIGiraffe.ApplicationServices.Requests.Commands.AddNewRequest.Factory;
 using APIGiraffe.ApplicationServices.Requests.Commands.RenameRequest;
 using APIGiraffe.ApplicationServices.Requests.Commands.DeleteRequest;
-using APIGiraffe.ApplicationServices.Requests.Commands.UpdateHeader;
 
 namespace APIGiraffe.UI
 {

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using APIGiraffe.ApplicationServices.Requests.Commands.AddNewHeader;
-using APIGiraffe.ApplicationServices.Requests.Commands.AddNewHeader.Factory;
+using APIGiraffe.ApplicationServices.Headers.Commands.AddNewHeader;
+using APIGiraffe.ApplicationServices.Headers.Commands.AddNewHeader.Factory;
 using APIGiraffe.Data.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 using Moq;

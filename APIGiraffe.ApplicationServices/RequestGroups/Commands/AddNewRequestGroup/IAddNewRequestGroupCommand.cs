@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace APIGiraffe.ApplicationServices.Requests.Commands.AddNewRequestGroup
+namespace APIGiraffe.ApplicationServices.RequestGroups.Commands.AddNewRequestGroup
 {
     public interface IAddNewRequestGroupCommand
     {

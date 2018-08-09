@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace APIGiraffe.ApplicationServices.Requests.Commands.AddNewHeader
+namespace APIGiraffe.ApplicationServices.Headers.Commands.AddNewHeader
 {
     public interface IAddNewHeaderCommand
     {

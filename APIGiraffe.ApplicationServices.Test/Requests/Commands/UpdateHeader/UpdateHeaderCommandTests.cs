@@ -1,4 +1,4 @@
-﻿using APIGiraffe.ApplicationServices.Requests.Commands.UpdateHeader;
+﻿using APIGiraffe.ApplicationServices.Headers.Commands.UpdateHeader;
 using APIGiraffe.Data.UnitOfWork;
 using APIGiraffe.Data.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 
-namespace APIGiraffe.ApplicationServices.Test.Requests.Commands.UpdateHeader
+namespace APIGiraffe.ApplicationServices.Test.Headers.Commands.UpdateHeader
 {
     public class UpdateHeaderCommandTests
     {

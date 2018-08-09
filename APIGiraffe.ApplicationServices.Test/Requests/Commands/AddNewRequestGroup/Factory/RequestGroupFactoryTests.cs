@@ -1,4 +1,4 @@
-﻿using APIGiraffe.ApplicationServices.Requests.Commands.AddNewRequestGroup.Factory;
+﻿using APIGiraffe.ApplicationServices.RequestGroups.Commands.AddNewRequestGroup.Factory;
 using APIGiraffe.Domain;
 using Xunit;
 

@@ -1,4 +1,4 @@
-﻿using APIGiraffe.ApplicationServices.Requests.Commands.AddNewRequestGroup;
+﻿using APIGiraffe.ApplicationServices.RequestGroups.Commands.AddNewRequestGroup;
 using APIGiraffe.UI.Navigation;
 
 namespace APIGiraffe.UI.ViewModels.RequestGroups

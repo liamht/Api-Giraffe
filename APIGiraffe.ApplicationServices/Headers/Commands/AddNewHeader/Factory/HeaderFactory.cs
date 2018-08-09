@@ -1,6 +1,6 @@
 ﻿using APIGiraffe.Domain;
 
-namespace APIGiraffe.ApplicationServices.Requests.Commands.AddNewHeader.Factory
+namespace APIGiraffe.ApplicationServices.Headers.Commands.AddNewHeader.Factory
 {
     public class HeaderFactory : IHeaderFactory
     {

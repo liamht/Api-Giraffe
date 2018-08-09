@@ -1,4 +1,4 @@
-﻿using APIGiraffe.ApplicationServices.Requests.Commands.DeleteRequestGroup;
+﻿using APIGiraffe.ApplicationServices.RequestGroups.Commands.DeleteRequestGroup;
 using APIGiraffe.UI.Navigation;
 using APIGiraffe.UI.ViewModels.Commands;
 using System.Windows.Input;

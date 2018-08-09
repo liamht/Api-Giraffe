@@ -1,6 +1,6 @@
 ﻿using APIGiraffe.Domain;
 
-namespace APIGiraffe.ApplicationServices.Requests.Commands.AddNewRequestGroup.Factory
+namespace APIGiraffe.ApplicationServices.RequestGroups.Commands.AddNewRequestGroup.Factory
 {
     public interface IRequestGroupFactory
     {

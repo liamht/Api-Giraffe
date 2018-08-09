@@ -1,4 +1,4 @@
-﻿namespace APIGiraffe.ApplicationServices.Requests.Commands.UpdateHeader
+﻿namespace APIGiraffe.ApplicationServices.Headers.Commands.UpdateHeader
 {
     public interface IUpdateHeaderCommand
     {

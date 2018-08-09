@@ -1,4 +1,4 @@
-﻿namespace APIGiraffe.ApplicationServices.Requests.Commands.DeleteHeader
+﻿namespace APIGiraffe.ApplicationServices.Headers.Commands.DeleteHeader
 {
     public interface IDeleteHeaderCommand
     {

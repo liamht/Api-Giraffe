@@ -2,7 +2,7 @@
 using APIGiraffe.Data.UnitOfWork;
 using System.Linq;
 
-namespace APIGiraffe.ApplicationServices.Requests.Commands.DeleteRequestGroup
+namespace APIGiraffe.ApplicationServices.RequestGroups.Commands.DeleteRequestGroup
 {
     public class DeleteRequestGroupCommand : IDeleteRequestGroupCommand
     {
