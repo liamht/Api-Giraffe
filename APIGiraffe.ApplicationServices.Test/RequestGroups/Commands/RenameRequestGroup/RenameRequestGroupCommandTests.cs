@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Moq;
 using Xunit;
 
-namespace APIGiraffe.ApplicationServices.Test.Requests.Commands.RenameRequestGroup
+namespace APIGiraffe.ApplicationServices.Test.RequestGroups.Commands.RenameRequestGroup
 {
     public class RenameRequestGroupCommandTests
     {

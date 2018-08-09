@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Moq;
 using Xunit;
 
-namespace APIGiraffe.ApplicationServices.Test.Requests.Commands.DeleteRequestGroup
+namespace APIGiraffe.ApplicationServices.Test.RequestGroups.Commands.DeleteRequestGroup
 {
     public class DeleteRequestGroupCommandTests
     {

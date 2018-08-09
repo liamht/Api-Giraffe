@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Moq;
 using Xunit;
 
-namespace APIGiraffe.ApplicationServices.Test.Requests.Commands.DeleteHeader
+namespace APIGiraffe.ApplicationServices.Test.Headers.Commands.DeleteHeader
 {
     public class DeleteHeaderCommandTests
     {

@@ -10,7 +10,7 @@ using Moq;
 using Xunit;
 using RequestGroup = APIGiraffe.ApplicationServices.RequestGroups.Queries.GetRequestGroups.RequestGroup;
 
-namespace APIGiraffe.ApplicationServices.Test.Requests.Queries.GetRequestGroups
+namespace APIGiraffe.ApplicationServices.Test.RequestGroups.Queries.GetRequestGroups
 {
     public class GetRequestGroupsQueryTests
     {

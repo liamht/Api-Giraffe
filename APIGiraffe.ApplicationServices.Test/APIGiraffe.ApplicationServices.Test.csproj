@@ -19,4 +19,8 @@
     <ProjectReference Include="..\APIGiraffe.Domain\APIGiraffe.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Headers\Queries\" />
+  </ItemGroup>
+
 </Project>

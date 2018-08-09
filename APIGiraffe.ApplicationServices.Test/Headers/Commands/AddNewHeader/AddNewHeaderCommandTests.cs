@@ -9,7 +9,7 @@ using Moq;
 using Xunit;
 using Request = APIGiraffe.Data.Entities.Request;
 
-namespace APIGiraffe.ApplicationServices.Test.Requests.Commands.AddNewHeader
+namespace APIGiraffe.ApplicationServices.Test.Headers.Commands.AddNewHeader
 {
     public class AddNewHeaderCommandTests
     {

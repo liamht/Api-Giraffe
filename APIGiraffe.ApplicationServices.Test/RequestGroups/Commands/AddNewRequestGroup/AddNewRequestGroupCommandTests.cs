@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Moq;
 using Xunit;
 
-namespace APIGiraffe.ApplicationServices.Test.Requests.Commands.AddNewRequestGroup
+namespace APIGiraffe.ApplicationServices.Test.RequestGroups.Commands.AddNewRequestGroup
 {
     public class AddNewRequestGroupCommandTests
     {
