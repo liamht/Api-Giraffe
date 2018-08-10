@@ -1,5 +1,5 @@
-﻿using APIGiraffe.ApplicationServices.Headers.Commands.AddNewHeader.Factory;
-using APIGiraffe.Domain;
+﻿using APIGiraffe.Domain.Entities;
+using APIGiraffe.Domain.Factories;
 using Xunit;
 
 namespace APIGiraffe.ApplicationServices.Test.Headers.Commands.AddNewHeader.Factory

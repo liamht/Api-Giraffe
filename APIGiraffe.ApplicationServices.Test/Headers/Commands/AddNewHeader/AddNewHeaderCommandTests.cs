@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using APIGiraffe.ApplicationServices.Headers.Commands.AddNewHeader;
-using APIGiraffe.ApplicationServices.Headers.Commands.AddNewHeader.Factory;
 using APIGiraffe.Data.UnitOfWork;
+using APIGiraffe.Domain.Factories;
 using Microsoft.EntityFrameworkCore;
 using Moq;
 using Xunit;
@@ -35,7 +35,7 @@ namespace APIGiraffe.ApplicationServices.Test.Headers.Commands.AddNewHeader
             _uow.Setup(u => u.Requests).Returns(_requestSet.Object);
             
             _factory = new Mock<IHeaderFactory>();
-            _factory.Setup(c => c.Create(It.IsAny<string>(), It.IsAny<string>())).Returns(new Domain.Header());
+            _factory.Setup(c => c.Create(It.IsAny<string>(), It.IsAny<string>())).Returns(new Domain.Entities.Header());
 
             _subject = new AddNewHeaderCommand(_uow.Object, _factory.Object);
         }
@@ -64,7 +64,7 @@ namespace APIGiraffe.ApplicationServices.Test.Headers.Commands.AddNewHeader
             _subject.Execute(1, "2", "test");
 
             _requestSet.Verify(c => c.Update(It.IsAny<Request>()), Times.Once);
-            _uow.Verify(c => c.SaveChanges(), Times.Once);
+            _uow.Verify(c => c.SaveChanges(), Times.Once);            
         }
 
         [Fact]
@@ -81,7 +81,7 @@ namespace APIGiraffe.ApplicationServices.Test.Headers.Commands.AddNewHeader
 
         [Fact]
         public void Execute_WhenHeaderValueIsNull_ThrowsArgumentNullException()
-        {
+        {            
             Assert.Throws<ArgumentNullException>(() => _subject.Execute(1, "test", null));
         }
         

@@ -1,8 +1,8 @@
 ﻿using System;
-using APIGiraffe.ApplicationServices.Requests.Commands.AddNewRequest.Factory;
 using APIGiraffe.Data.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using APIGiraffe.Domain.Factories;
 
 namespace APIGiraffe.ApplicationServices.Requests.Commands.AddNewRequest
 {
@@ -24,7 +24,7 @@ namespace APIGiraffe.ApplicationServices.Requests.Commands.AddNewRequest
                 throw new ArgumentNullException(nameof(name), "name cannot be null when added to database");
             }
 
-            var domainObject = _factory.Create(name);
+            var domainObject = _factory.Create(groupId, name);
 
             var group = _uow.RequestGroups.Include(c => c.Requests).Single(c => c.Id == groupId);
             group.Requests.Add(domainObject.ToDatabaseEntity());

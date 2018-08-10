@@ -6,28 +6,29 @@ using APIGiraffe.ApplicationServices.Headers.Commands.AddNewHeader;
 using APIGiraffe.ApplicationServices.Headers.Commands.DeleteHeader;
 using APIGiraffe.ApplicationServices.Requests.Commands.UpdateRequest;
 using APIGiraffe.ApplicationServices.Requests.Queries.GetRequestDetails;
-using APIGiraffe.Domain;
 using APIGiraffe.UI.Navigation;
 using APIGiraffe.UI.Views;
 using APIGiraffe.UI.ViewModels.Commands;
 using Header = APIGiraffe.ApplicationServices.Requests.Queries.GetRequestDetails.Header;
 using System.Linq;
 using APIGiraffe.UI.ViewModels.Headers;
+using APIGiraffe.Domain.Entities;
+using APIGiraffe.Domain.Factories;
 
 namespace APIGiraffe.UI.ViewModels.Requests
 {
     public class CurrentRequestViewModel : BasePageViewModel
     {
         public override string Title => this.Name;
-        
+
         private readonly IAddNewHeaderCommand _addHeaderCommand;
         private readonly IUpdateRequestCommand _updateRequestCommand;
         private readonly IDeleteHeaderCommand _deleteHeaderCommand;
         private readonly IGetRequestDetailsQuery _getDetailsQuery;
         private readonly INavigationHelper _navigationHelper;
-
+        private readonly IRequestFactory _requestFactory;
+        private readonly IHeaderFactory _headerFactory;
         private bool _changesEnabled;
-
         private int _requestId;
 
         #region Commands
@@ -102,8 +103,9 @@ namespace APIGiraffe.UI.ViewModels.Requests
 
         public ObservableCollection<Header> RequestHeaders { get; set; }
 
-        public CurrentRequestViewModel(IAddNewHeaderCommand addHeaderCommand, IUpdateRequestCommand updateRequestCommand, 
-            IDeleteHeaderCommand deleteHeaderCommand, IGetRequestDetailsQuery getDetailsQuery, INavigationHelper nav)
+        public CurrentRequestViewModel(IAddNewHeaderCommand addHeaderCommand, IUpdateRequestCommand updateRequestCommand,
+            IDeleteHeaderCommand deleteHeaderCommand, IGetRequestDetailsQuery getDetailsQuery, INavigationHelper nav,
+            IRequestFactory requestFactory, IHeaderFactory headerFactory)
         {
             Response = "The response from the server will show here when a request is sent";
 
@@ -123,13 +125,17 @@ namespace APIGiraffe.UI.ViewModels.Requests
             _deleteHeaderCommand = deleteHeaderCommand;
             _getDetailsQuery = getDetailsQuery;
             _navigationHelper = nav;
+            _requestFactory = requestFactory;
+            _headerFactory = headerFactory;
         }
 
         private void EditHeader(int headerId)
         {
             var header = RequestHeaders.Single(c => c.Id == headerId);
 
-            _navigationHelper.ShowModal<EditHeaderDialog, EditHeaderViewModel>(vm => { vm.SetExistingValues(header.Id, header.Name, header.Value);
+            _navigationHelper.ShowModal<EditHeaderDialog, EditHeaderViewModel>(vm =>
+            {
+                vm.SetExistingValues(header.Id, header.Name, header.Value);
                 vm.OnDeleteSuccessful += HeaderDeleteCallback;
             });
         }
@@ -167,15 +173,9 @@ namespace APIGiraffe.UI.ViewModels.Requests
 
         private async Task GetResponse()
         {
-            var httprequest = new Request()
-            {
-                Url = this.Url,
-            };
+            var domainHeaders = RequestHeaders.Select(c => _headerFactory.Create(c.Name, c.Value));
 
-            foreach (var header in RequestHeaders)
-            {
-                httprequest.AddHeader(new Domain.Header() { Name = header.Name, Value = header.Value });
-            }
+            var httprequest = _requestFactory.Create(Url, domainHeaders.ToList());
 
             Response = await httprequest.GetResponse();
         }

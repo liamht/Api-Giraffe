@@ -1,5 +1,5 @@
-﻿using APIGiraffe.ApplicationServices.RequestGroups.Commands.AddNewRequestGroup.Factory;
-using APIGiraffe.Domain;
+﻿using APIGiraffe.Domain.Entities;
+using APIGiraffe.Domain.Factories;
 using Xunit;
 
 namespace APIGiraffe.ApplicationServices.Test.RequestGroups.Commands.AddNewRequestGroup.Factory

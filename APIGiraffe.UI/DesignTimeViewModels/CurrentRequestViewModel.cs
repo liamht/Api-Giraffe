@@ -1,6 +1,5 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
-using APIGiraffe.Domain;
 
 namespace APIGiraffe.UI.DesignTimeViewModels
 {
@@ -20,7 +19,7 @@ namespace APIGiraffe.UI.DesignTimeViewModels
 
         public string Name { get; set; }
 
-        public ObservableCollection<Header> RequestHeaders { get; set; }
+        public ObservableCollection<Domain.Entities.Header> RequestHeaders { get; set; }
 
     }
 }

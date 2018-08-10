@@ -1,5 +1,6 @@
-﻿using APIGiraffe.ApplicationServices.Requests.Commands.AddNewRequest.Factory;
-using APIGiraffe.Domain;
+﻿using APIGiraffe.Domain;
+using APIGiraffe.Domain.Entities;
+using APIGiraffe.Domain.Factories;
 using Xunit;
 
 namespace APIGiraffe.ApplicationServices.Test.Requests.Commands.AddNewRequest.Factory
@@ -14,9 +15,9 @@ namespace APIGiraffe.ApplicationServices.Test.Requests.Commands.AddNewRequest.Fa
         }
 
         [Fact]
-        public void Create_CreatesNewHeader()
+        public void Create_CreatesNewRequest()
         {
-            var result = _subject.Create("test");
+            var result = _subject.Create(1, "test");
 
             Assert.IsType<Request>(result);
         }
@@ -24,15 +25,15 @@ namespace APIGiraffe.ApplicationServices.Test.Requests.Commands.AddNewRequest.Fa
         [Fact]
         public void Create_SetsValueOfRequestName()
         {
-            var result = _subject.Create("hello");
+            var result = _subject.Create(1, "hello");
 
             Assert.Equal("hello", result.RequestName);
         }
 
         [Fact]
-        public void Create_LeavesPropertiesOtherThanNameAsNull()
+        public void Create_LeavesPropertiesOtherThanNameAndGroupIdAsNull()
         {
-            var result = _subject.Create("hello");
+            var result = _subject.Create(1, "hello");
 
             Assert.Null(result.Url);
             Assert.Empty(result.Headers);
@@ -41,7 +42,7 @@ namespace APIGiraffe.ApplicationServices.Test.Requests.Commands.AddNewRequest.Fa
         [Fact]
         public void Create_WhenNameIsNull_SetsNullValueInReturnObject()
         {
-            var result = _subject.Create(null);
+            var result = _subject.Create(1, null);
 
             Assert.Null(result.RequestName);
         }

@@ -1,9 +1,9 @@
 ﻿using System;
-using APIGiraffe.ApplicationServices.Headers.Commands.AddNewHeader.Factory;
 using APIGiraffe.Data.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using Remotion.Linq.Parsing;
+using APIGiraffe.Domain.Factories;
 
 namespace APIGiraffe.ApplicationServices.Headers.Commands.AddNewHeader
 {

@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using APIGiraffe.ApplicationServices.RequestGroups.Commands.AddNewRequestGroup;
-using APIGiraffe.ApplicationServices.RequestGroups.Commands.AddNewRequestGroup.Factory;
 using APIGiraffe.Data.Entities;
 using APIGiraffe.Data.UnitOfWork;
+using APIGiraffe.Domain.Factories;
 using Microsoft.EntityFrameworkCore;
 using Moq;
 using Xunit;
@@ -26,7 +24,7 @@ namespace APIGiraffe.ApplicationServices.Test.RequestGroups.Commands.AddNewReque
             _uow.Setup(u => u.RequestGroups).Returns(_groupSet.Object);
 
             _factory = new Mock<IRequestGroupFactory>();
-            _factory.Setup(c => c.Create(It.IsAny<string>())).Returns(new Domain.RequestGroup());
+            _factory.Setup(c => c.Create(It.IsAny<string>())).Returns(new Domain.Entities.RequestGroup());
 
             _subject = new AddNewRequestGroupCommand(_uow.Object, _factory.Object);
         }
