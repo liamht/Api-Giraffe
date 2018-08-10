@@ -3,7 +3,7 @@ using APIGiraffe.Domain.Entities;
 using APIGiraffe.Domain.Factories;
 using Xunit;
 
-namespace APIGiraffe.ApplicationServices.Test.Requests.Commands.AddNewRequest.Factory
+namespace APIGiraffe.Domain.Test.Requests.Commands.AddNewRequest.Factory
 {
     public class RequestFactoryTests
     {

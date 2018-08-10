@@ -2,7 +2,7 @@
 using APIGiraffe.Domain.Factories;
 using Xunit;
 
-namespace APIGiraffe.ApplicationServices.Test.RequestGroups.Commands.AddNewRequestGroup.Factory
+namespace APIGiraffe.Domain.Test.RequestGroups.Commands.AddNewRequestGroup.Factory
 {
     public class RequestGroupFactoryTests
     {

@@ -2,7 +2,7 @@
 using APIGiraffe.Domain.Factories;
 using Xunit;
 
-namespace APIGiraffe.ApplicationServices.Test.Headers.Commands.AddNewHeader.Factory
+namespace APIGiraffe.Domain.Test.Headers.Commands.AddNewHeader.Factory
 {
     public class HeaderFactoryTests
     {
