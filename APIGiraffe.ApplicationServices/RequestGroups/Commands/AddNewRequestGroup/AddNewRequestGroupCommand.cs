@@ -1,4 +1,5 @@
 ﻿using System;
+using APIGiraffe.Data.Entities.Factory;
 using APIGiraffe.Data.UnitOfWork;
 using APIGiraffe.Domain.Factories;
 
@@ -8,11 +9,13 @@ namespace APIGiraffe.ApplicationServices.RequestGroups.Commands.AddNewRequestGro
     {
         private readonly IUnitOfWork _uow;
         private readonly IRequestGroupFactory _factory;
+        private readonly IRequestGroupDataFactory _dataFactory;
 
-        public AddNewRequestGroupCommand(IUnitOfWork uow, IRequestGroupFactory factory)
+        public AddNewRequestGroupCommand(IUnitOfWork uow, IRequestGroupFactory factory, IRequestGroupDataFactory dataFactory)
         {
             _uow = uow;
             _factory = factory;
+            _dataFactory = dataFactory;
         }
 
         public void Execute(string name)
@@ -24,7 +27,7 @@ namespace APIGiraffe.ApplicationServices.RequestGroups.Commands.AddNewRequestGro
 
             var domainObject = _factory.Create(name);
 
-            _uow.RequestGroups.Add(domainObject.ToDataEntity());
+            _uow.RequestGroups.Add(_dataFactory.Create(domainObject));
             _uow.SaveChanges();
         }
     }

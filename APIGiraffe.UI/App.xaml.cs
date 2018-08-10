@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using Microsoft.EntityFrameworkCore;
 using Ninject;
 using APIGiraffe.UI.ViewModels;
@@ -22,6 +21,7 @@ using APIGiraffe.ApplicationServices.Requests.Queries.GetRequestDetails;
 using APIGiraffe.ApplicationServices.Requests.Commands.RenameRequest;
 using APIGiraffe.ApplicationServices.Requests.Commands.DeleteRequest;
 using APIGiraffe.Domain.Factories;
+using APIGiraffe.Data.Entities.Factory;
 
 namespace APIGiraffe.UI
 {
@@ -68,6 +68,10 @@ namespace APIGiraffe.UI
             _container.Bind<IHeaderFactory>().To<HeaderFactory>();
             _container.Bind<IRequestFactory>().To<RequestFactory>();
             _container.Bind<IRequestGroupFactory>().To<RequestGroupFactory>();
+
+            _container.Bind<IHeaderDataFactory>().To<HeaderDataFactory>();
+            _container.Bind<IRequestDataFactory>().To<RequestDataFactory>();
+            _container.Bind<IRequestGroupDataFactory>().To<RequestGroupDataFactory>();
 
             _container.Bind<IAddNewRequestGroupCommand>().To<AddNewRequestGroupCommand>();
             _container.Bind<IDeleteRequestGroupCommand>().To<DeleteRequestGroupCommand>();

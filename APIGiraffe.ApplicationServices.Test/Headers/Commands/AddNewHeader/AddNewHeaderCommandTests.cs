@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using APIGiraffe.ApplicationServices.Headers.Commands.AddNewHeader;
+using APIGiraffe.Data.Entities.Factory;
 using APIGiraffe.Data.UnitOfWork;
 using APIGiraffe.Domain.Factories;
 using Microsoft.EntityFrameworkCore;
@@ -16,6 +17,7 @@ namespace APIGiraffe.ApplicationServices.Test.Headers.Commands.AddNewHeader
         private readonly AddNewHeaderCommand _subject;
         private readonly Mock<IUnitOfWork> _uow;
         private readonly Mock<IHeaderFactory> _factory;
+        private readonly Mock<IHeaderDataFactory> _dataFactory;
         private readonly Request _request;
         private readonly Mock<DbSet<Request>> _requestSet;
 
@@ -37,7 +39,10 @@ namespace APIGiraffe.ApplicationServices.Test.Headers.Commands.AddNewHeader
             _factory = new Mock<IHeaderFactory>();
             _factory.Setup(c => c.Create(It.IsAny<string>(), It.IsAny<string>())).Returns(new Domain.Entities.Header());
 
-            _subject = new AddNewHeaderCommand(_uow.Object, _factory.Object);
+            _dataFactory = new Mock<IHeaderDataFactory>();
+            _dataFactory.Setup(c => c.Create(It.IsAny<Domain.Entities.Header>())).Returns(new Data.Entities.Header());
+
+            _subject = new AddNewHeaderCommand(_uow.Object, _factory.Object, _dataFactory.Object);
         }
 
         [Fact]

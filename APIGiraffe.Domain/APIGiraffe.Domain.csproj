@@ -4,8 +4,4 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\APIGiraffe.Data\APIGiraffe.Data.csproj" />
-  </ItemGroup>
-
 </Project>

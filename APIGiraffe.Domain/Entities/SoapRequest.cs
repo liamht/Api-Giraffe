@@ -31,18 +31,6 @@ namespace APIGiraffe.Domain.Entities
             _headers.Add(header);
         }
 
-        public Data.Entities.Request ToDatabaseEntity()
-        {
-            return new Data.Entities.Request()
-            {
-                Headers = Headers.Select(c => c.ToDataLayerObject()).ToList(),
-                Id = Id,
-                Name = RequestName,
-                Url = Url,
-                GroupId = GroupId
-            };
-        }
-
         public async Task<string> GetResponse()
         {
             using (var client = new HttpClient())

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using APIGiraffe.ApplicationServices.Requests.Commands.AddNewRequest;
 using APIGiraffe.Data.Entities;
+using APIGiraffe.Data.Entities.Factory;
 using APIGiraffe.Data.UnitOfWork;
 using APIGiraffe.Domain.Factories;
 using Microsoft.EntityFrameworkCore;
@@ -19,6 +20,7 @@ namespace APIGiraffe.ApplicationServices.Test.Requests.Commands.AddNewRequest
         private readonly Mock<IRequestFactory> _factory;
         private readonly RequestGroup _group;
         private readonly Mock<DbSet<RequestGroup>> _groupSet;
+        private readonly Mock<IRequestDataFactory> _dataFactory;
 
         public AddNewRequestCommandTests()
         {
@@ -38,7 +40,10 @@ namespace APIGiraffe.ApplicationServices.Test.Requests.Commands.AddNewRequest
             _factory = new Mock<IRequestFactory>();
             _factory.Setup(c => c.Create(It.IsAny<int>(), It.IsAny<string>())).Returns(new Domain.Entities.Request());
 
-            _subject = new AddNewRequestCommand(_uow.Object, _factory.Object);
+            _dataFactory = new Mock<IRequestDataFactory>();
+            _dataFactory.Setup(c => c.Create(It.IsAny<Domain.Entities.Request>())).Returns(new Request());
+
+            _subject = new AddNewRequestCommand(_uow.Object, _factory.Object, _dataFactory.Object);
         }
 
         [Fact]
